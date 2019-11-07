@@ -4,6 +4,7 @@ let path = require("path");
 let expressHbs = require("express-handlebars");
 
 let app = express();
+let db = require("./util/database");
 
 const port = process.env.PORT || 3000;
 
@@ -25,6 +26,12 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
+  // use example of database
+  db.execute("select * from test")
+    .then(([rows, fields]) => {
+      console.log("rows:" + JSON.stringify(rows));
+    })
+    .catch(err => console.log("error: " + err));
   res.render("home");
 });
 
