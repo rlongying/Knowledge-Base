@@ -3,6 +3,8 @@ let bodyParser = require("body-parser");
 let path = require("path");
 let expressHbs = require("express-handlebars");
 let loginRouter = require("./routes/login")
+let homeRouter = require("./routes/home")
+
 
 let app = express();
 
@@ -25,6 +27,7 @@ app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(loginRouter);
+app.use(homeRouter);
 
 
 

@@ -4,5 +4,5 @@ exports.loginPage = (req, res) => {
 };
  
 exports.registerPage = (req, res) => {
-    res.render('register', {registerCSS: true });
+    res.render('signup', {registerCSS: true });
 };

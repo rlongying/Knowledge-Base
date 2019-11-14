@@ -34,6 +34,7 @@ body{
     width:100%;
 } 
 
-#rightDiv{
-    
+mark{
+    margin:0;
+    padding:0;
 }

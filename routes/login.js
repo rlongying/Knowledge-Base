@@ -1,8 +1,8 @@
 let express = require("express");
 let router = express.Router();
-let loginController = require("../controllers/loginController");
+let loginController = require("../controllers/LoginController");
 
 router.get("/", loginController.loginPage);
-router.get("/register", loginController.registerPage);
+router.get("/signUp", loginController.registerPage);
 
 module.exports = router;

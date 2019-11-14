@@ -23,8 +23,8 @@ body{
 }
 #title{
     font-size:250%;
-    margin-bottom: 2%;
     font-family: 'Arial Narrow';
+    margin-bottom: 2%;
 }
 #slogan{
     font-size:200%;
@@ -51,4 +51,8 @@ body{
 
 .info{
     padding-right:0;
+}
+mark{
+    margin:0;
+    padding:0;
 }
