@@ -1,0 +1,39 @@
+/* div {
+    border-style: solid;
+    border-width: 1px;
+} */
+
+body{
+    padding:3%;
+}
+.blue{
+    color: #0195FF;
+    background-color: white;
+}
+
+#title{
+    font-size:200%;
+    margin-bottom: 2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.explain{
+    font-size:200%;
+    margin-bottom: 2%;
+    font-weight: bold;
+    padding: 5%;
+    padding-left:0;
+}
+.explain div{
+    width:50%;
+    font-family: 'Arial Narrow';
+    font-size:120%;
+}
+
+#submitBtn button{
+    width:100%;
+} 
+
+#rightDiv{
+    
+}
