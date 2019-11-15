@@ -2,6 +2,9 @@ let express = require("express");
 let bodyParser = require("body-parser");
 let path = require("path");
 let expressHbs = require("express-handlebars");
+let loginRouter = require("./routes/login")
+let homeRouter = require("./routes/home")
+
 
 let app = express();
 let db = require("./util/database");
@@ -24,15 +27,9 @@ app.set("view engine", "hbs");
 app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(loginRouter);
+app.use(homeRouter);
 
-app.get("/", (req, res) => {
-  // use example of database
-  db.execute("select * from test")
-    .then(([rows, fields]) => {
-      console.log("rows:" + JSON.stringify(rows));
-    })
-    .catch(err => console.log("error: " + err));
-  res.render("home");
-});
+
 
 app.listen(port, () => console.log(`Server is listening on: ${port}`));

@@ -1,0 +1,58 @@
+/* div{
+    border-style: solid;
+    border-width: 1px;
+} */
+
+body{
+    padding:3%;
+}
+
+#mainImage{
+    max-width:100%;
+    max-height:100%;
+}
+#leftSide{
+    padding:3%;
+}
+#rightSide{
+    padding:3%;
+}
+#imageDiv{
+    height:100%;
+    width:100%;
+}
+#title{
+    font-size:250%;
+    font-family: 'Arial Narrow';
+    margin-bottom: 2%;
+}
+#slogan{
+    font-size:200%;
+    margin-bottom: 2%;
+    font-weight:bold;
+    font-family: 'Arial Narrow';
+}
+.blue{
+    color: #0195FF;
+    background-color: white;
+}
+
+#submitBtn button{
+    width:100%;
+} 
+
+#name{
+    padding:0;
+    display:flex;
+}
+#name div{
+    padding-right:0;
+}
+
+.info{
+    padding-right:0;
+}
+mark{
+    margin:0;
+    padding:0;
+}
