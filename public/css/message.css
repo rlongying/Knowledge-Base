@@ -1,0 +1,66 @@
+/* div {
+    border-style: solid;
+    border-width: 1px;
+} */
+
+html, body{
+    height: 100%;
+}
+#mainDiv{
+    margin-top: 3%;
+    display:flex;
+    height: 80%;
+}
+#chatList{
+    width:30%;
+    margin:0;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: lightgray;
+    margin-left:1%;
+}
+#messages{
+    padding:3%;
+    padding-top:0;
+    width: 70%;
+    margin:0;
+    margin-right:1%;
+    margin-left: 1%;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: lightgray;
+}
+
+#messages-messageArea{
+    height:90%;
+}
+
+.chats{
+    margin:3%;
+    margin-top:3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.chats:hover{
+    background-color: lightsteelblue;
+}
+
+.senderInfo div{
+    margin-right:2%;
+}
+
+.profilePic-message{
+    width: 10%;
+}
+
+.profilePic-message img{
+    width:50px;
+    height:50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.meesages-each{
+    margin-top:2%;
+}
