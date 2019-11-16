@@ -4,6 +4,7 @@ let path = require("path");
 let expressHbs = require("express-handlebars");
 let loginRouter = require("./routes/login")
 let homeRouter = require("./routes/home")
+let messageRouter = require("./routes/message")
 
 
 let app = express();
@@ -28,7 +29,6 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(loginRouter);
 app.use(homeRouter);
-
-
+app.use(messageRouter);
 
 app.listen(port, () => console.log(`Server is listening on: ${port}`));
