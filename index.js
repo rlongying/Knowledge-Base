@@ -7,6 +7,9 @@ let homeRouter = require("./routes/home");
 const postRouter = require("./routes/post");
 const profileRouter = require("./routes/profile");
 
+// helper function of handler bars
+const helpers = require("./util/hbsHelpers");
+
 let app = express();
 let db = require("./util/database");
 
@@ -20,7 +23,8 @@ app.engine(
   expressHbs({
     layoutsDir: "views/layouts",
     defaultLayout: "main-layout",
-    extname: "hbs"
+    extname: "hbs",
+    helpers: helpers
   })
 );
 

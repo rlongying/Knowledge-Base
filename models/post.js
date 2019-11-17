@@ -1,4 +1,5 @@
 let db = require("../util/database");
+const LATEST_POST = 5;
 
 const seedPosts = () => {
   let sql =
@@ -11,6 +12,19 @@ const seedPosts = () => {
   ];
 
   return db.query(sql, [values]);
+};
+
+const addPost = post => {
+  const { topic, subject, message, created_at, user_id } = post;
+  let sql =
+    "insert into post(topic, subject, message, created_at, user_id) values (?,?,?,?,?)";
+  return db.query(sql, [topic, subject, message, created_at, user_id]);
+};
+
+const getLatestPosts = () => {
+  let sql = `SELECT * FROM post ORDER BY created_at DESC LIMIT ${LATEST_POST}`;
+
+  return db.query(sql);
 };
 
 /**
@@ -56,5 +70,7 @@ module.exports = {
   getPost: getPostById,
   getPostsByContent: getPostsByContent,
   getPostsByTopic: getPostsByTopic,
-  getPostsByUserId: getPostsByUserId
+  getPostsByUserId: getPostsByUserId,
+  getLatestPosts: getLatestPosts,
+  addPost: addPost
 };
