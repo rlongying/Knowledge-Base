@@ -6,6 +6,10 @@ let messageRouter = require("./routes/message")
 let loginRouter = require("./routes/login");
 let homeRouter = require("./routes/home");
 const postRouter = require("./routes/post");
+const profileRouter = require("./routes/profile");
+
+// helper function of handler bars
+const helpers = require("./util/hbsHelpers");
 
 let app = express();
 let db = require("./util/database");
@@ -20,7 +24,8 @@ app.engine(
   expressHbs({
     layoutsDir: "views/layouts",
     defaultLayout: "main-layout",
-    extname: "hbs"
+    extname: "hbs",
+    helpers: helpers
   })
 );
 
@@ -32,5 +37,6 @@ app.use(loginRouter);
 app.use("/home", homeRouter);
 app.use("/message", messageRouter);
 app.use("/posts", postRouter);
+app.use(profileRouter);
 
 app.listen(port, () => console.log(`Server is listening on: ${port}`));

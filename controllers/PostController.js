@@ -47,5 +47,21 @@ exports.getPostsByUserId = (req, res) => {
 };
 
 exports.addPost = (req, res) => {
-  res.send("adding a post");
+  const { topic, subject, message, created_at, user_id } = req.body;
+  let post = { topic, subject, message, created_at, user_id };
+
+  postModel
+    .addPost(post)
+    .then(results => res.status(200).json(results))
+    .catch(err => res.json({ "add error:": err }));
+};
+
+exports.getLatestPosts = (req, res) => {
+  postModel
+    .getLatestPosts()
+    .then(([rows, fields]) => {
+      // res.json(rows);
+      res.render("partials/posts", { postCSS: true, posts: rows });
+    })
+    .catch(err => console.log("get latest posts error: " + err));
 };
