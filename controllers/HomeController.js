@@ -1,4 +1,4 @@
-let mod = require('../models/user');
+let homeModel = require('../models/user');
 
 
 exports.showHome = (req, res) => {

@@ -36,13 +36,39 @@ html, body{
 }
 
 .chats{
+    display:flex;
     margin:3%;
     margin-top:3%;
     padding-top: 2%;
     padding-bottom: 2%;
 }
+
+.chats div:nth-of-type(1){
+    margin-right: 5%;
+}
+.chats div:nth-of-type(2){
+    width:80%;
+}
+.chats div:nth-of-type(2){
+    width:100%;
+}
+.chats div:nth-of-type(2) div:nth-of-type(1){
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+}
+.chats div:nth-of-type(2) div:nth-of-type(1) div:nth-of-type(1) {
+    width:80%;
+    margin:0;
+}
+.chats div:nth-of-type(2) div:nth-of-type(1) div:nth-of-type(2){
+    width:25%;
+    margin:0;
+}
+
 .chats:hover{
     background-color: lightsteelblue;
+    cursor: pointer;
 }
 
 .senderInfo div{
@@ -63,4 +89,21 @@ html, body{
 
 .meesages-each{
     margin-top:2%;
+}
+
+.date-divider{
+    border: none;
+    border-top: 1px solid lightgray;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+.date-divider:after{
+    background: #fff;
+    color: gray;
+    content: 'SEP 17';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
 }
