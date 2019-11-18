@@ -1,4 +1,4 @@
-let mod = require('../models/user');
+let userModel = require('../models/user');
 
 
 exports.loginPage = (req, res) => {
