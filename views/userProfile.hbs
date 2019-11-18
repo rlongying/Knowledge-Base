@@ -3,7 +3,7 @@
     <div class="row d-flex flex-column mt-4">
         <div class="d-flex justify-content-between">
             <div class="image rounded-circle">
-                <img src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-760x506.jpg" alt="">
+                <img src="{{user.image}}" alt="">
             </div>
             <div class="align-self-end">
                 <button id="messageBtn" class="btn btn-primary btn-lg" type="submit">Message</button>
@@ -11,12 +11,12 @@
         </div>
         <div class="d-flex justify-content-between mt-3">
             <div>
-                <h3>Kevin Hudson</h3>
+                <h3>{{user.first_name}} {{user.last_name}}</h3>
             </div>
             <div class="d-flex flex-column">
                 <div class="d-flex justify-content-between">
                     <h5 class="likesPosts">
-                        <span>5 Likes&nbsp;&nbsp;</span>
+                        <span>{{user.likes}} Likes&nbsp;&nbsp;</span>
                         <button id="likeBtn" class="btn btn-primary btn-sm rounded-circle" type="submit">+</button>
                     </h5>
                 </div>
@@ -26,13 +26,13 @@
             </div>
         </div>
         <div>
-            <h5>Team lead | Part time singer | Full time dad</h5>
+            <h5>{{user.about}}</h5>
         </div>
         <div>
-            <h5>Canada</h5>
+            <h5>{{user.country}}</h5>
         </div>
     </div>
     <div class="row mt-4">
-        <h1>All posts by Kevin</h5>
+        <h1>All posts by {{user.first_name}}</h5>
     </div>
 </div>

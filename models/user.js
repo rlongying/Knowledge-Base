@@ -1,4 +1,3 @@
-let fs = require('fs');
 let db = require('../util/database');
 
 async function test() {
@@ -9,6 +8,17 @@ async function test() {
     });
 }
 
+/**
+ * get user with the specified id
+ * this method returns a promise
+ * @param {Number} userId
+ */
+const getUserById = userId => {
+    return db.query(`SELECT * FROM user WHERE id = ${userId}`);
+  };
+  
+
 module.exports = {
-    test : test
+    test : test,
+    getUserById : getUserById
 }
