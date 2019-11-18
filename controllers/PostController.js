@@ -60,7 +60,8 @@ exports.getLatestPosts = (req, res) => {
   postModel
     .getLatestPosts()
     .then(([rows, fields]) => {
-      res.json(rows);
+      // res.json(rows);
+      res.render("partials/posts", { postCSS: true, posts: rows });
     })
     .catch(err => console.log("get latest posts error: " + err));
 };

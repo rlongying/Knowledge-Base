@@ -1,5 +1,18 @@
 const TEXT_ALLOWED_LENGTH = 100;
-
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "July",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
 /**
  * truncate the string and append "..." if the length of text if greater than TEXT_ALLOWED_LENGTH
  * @param {string} text
@@ -17,6 +30,18 @@ const ellipsisText = text => {
   return result;
 };
 
+const parseDate = date => {
+  date = new Date(date);
+
+  let year = date.getFullYear();
+  let month = date.getMonth();
+  let day = date.getDate();
+
+  date = `${day}  ${MONTHS[month]}, ${year}`;
+  return date;
+};
+
 module.exports = {
-  ellipsis: ellipsisText
+  ellipsis: ellipsisText,
+  parseDate: parseDate
 };
