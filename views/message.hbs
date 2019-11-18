@@ -17,21 +17,24 @@
     <div id="messages">
         <div id='messages-messageArea' class='overflow-auto'>
             {{#each messageList}}
-            <div class="meesages-each d-flex">
-                <div class="profilePic-message"><img class='rounded-circle'src="{{this.image}}" alt=""></div>
-                <div class="col-lg-10">
-                    <div class="senderInfo d-flex">
-                        <div>{{this.first_name}} {{this.last_name}}</div>
-                        <div>&#9900</div>
-                        <div>{{this.created_at}}</div>
-                    </div>
-                    <div>
-                        {{this.message}}
+            <hr class='hr-text' data-content="{{this.[0].created_at}}">
+                {{#each this}}
+                <div class="meesages-each d-flex">
+                    <div class="profilePic-message"><img class='rounded-circle'src="{{this.image}}" alt=""></div>
+                    <div class="col-lg-10">
+                        <div class="senderInfo d-flex">
+                            <div>{{this.first_name}} {{this.last_name}}</div>
+                            <div>&#9900</div>
+                            <div>{{this.created_at}}</div>
+                        </div>
+                        <div>
+                            {{this.message}}
+                        </div>
                     </div>
                 </div>
-            </div>
+                {{/each}}
             {{/each}}
-            {{!-- <hr class='date-divider'> --}} 
+            
         </div>
         <div id='messages-sendArea' class='d-flex'>
             <textarea class='form-control'></textarea>
