@@ -9,6 +9,21 @@ exports.messagePage = async(req, res) => {
     let messageList = await messageModel.getMessages().then(([rows, fieldData]) => {
         return rows;
     });
+
+    // handling talk list
+    talkList.forEach(data => {
+        var tmp = new Date(data.latestDate)
+        var month = tmp.toLocaleString("default",{month: 'short'});
+        var date = tmp.getDate() + 1;
+
+        data.latestDate = month + " " + date;    
+    });
+
+
+
+
+
+    // handling message list
     let refinedList = new Array();
     let eachDay = new Array();
     let tmpDate = messageList[0].created_at.slice(8,10);
@@ -24,7 +39,8 @@ exports.messagePage = async(req, res) => {
     }
     refinedList.push(eachDay);
 
-    console.log(refinedList[1]);
+
+    
     
     res.render('message', { chatList: talkList, messageList: refinedList, messageCSS: true }); 
 };

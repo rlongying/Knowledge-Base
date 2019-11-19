@@ -38,9 +38,12 @@ const seedMessages = () => {
 const getTalkList = (userId) => {
     // return db.query(`SELECT * FROM message_topic WHERE user_from_id = ${userId} OR user_to_id = ${userId}`);
     return db.query(`SELECT * FROM message_topic
-                        INNER JOIN user
-                        ON user.id = message_topic.user_from_id
-                        WHERE user_from_id = 1 OR user_to_id = 1`);
+                      INNER JOIN user
+                      ON user.id = message_topic.user_from_id
+                      INNER JOIN (select topic_id, max(created_at) latestDate from message
+                            group by topic_id) message
+                      ON message.topic_id = message_topic.id
+                      WHERE user_from_id = 1 OR user_to_id = 1`);
 };
 const getMessages = (userId) => {
   // return db.query(`SELECT * FROM message_topic WHERE user_from_id = ${userId} OR user_to_id = ${userId}`);

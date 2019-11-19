@@ -35,7 +35,7 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(loginRouter);
 app.use("/home", homeRouter);
-app.use("/message", messageRouter);
+app.use("/messages", messageRouter);
 app.use("/posts", postRouter);
 app.use(profileRouter);
 
