@@ -2,7 +2,7 @@
 <div class="container" >
     <div class="row d-flex flex-column mt-4">
         <div class="d-flex justify-content-between">
-            <div class="image rounded-circle">
+            <div id="mainImage" class="rounded-circle">
                 <img src="{{user.image}}" alt="">
             </div>
             <div class="align-self-end">
@@ -33,6 +33,9 @@
         </div>
     </div>
     <div class="row mt-4">
-        <h1>All posts by {{user.first_name}}</h5>
+        <h1>All posts by {{user.first_name}}</h1>
+    </div>
+    <div class="d-flex flex-column mt-4">
+        {{>posts}}
     </div>
 </div>

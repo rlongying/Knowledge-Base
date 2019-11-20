@@ -1,20 +1,4 @@
-.image {
-    overflow:hidden;
-    height: 300px;
-    width: 300px;
-    border: 1px solid;
-}
-
-.image img {
-    height: 100%;
-}
-
-#messageBtn {
-    background-color: #0073B1;
-    font-size: 1.5em;
-}
-
-.likesPosts {
-    font-weight: bold;
-    color: #1673B1;
-}
+#mainImage { overflow:hidden; border: 1px solid; height: 300px; width: 300px;}
+#mainImage img { height: 100%; }
+#messageBtn { background-color: #0073B1; }
+.likesPosts { font-weight: bold; color: #1673B1; }

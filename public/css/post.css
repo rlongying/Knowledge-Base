@@ -13,7 +13,12 @@
 }
 
 .topic {
-  border: 1px solid rgb(75, 247, 87);
+  border: 1px solid #04A4E8;
   padding: 2px 15px;
-  color: cyan;
+  color: #99D9EA;
+}
+
+.replies {
+  text-decoration: underline;
+  text-decoration-color: #04A4E8;
 }

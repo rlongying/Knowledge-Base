@@ -5,13 +5,13 @@
             class="mr-3 post-img" alt="">
         <div class="media-body">
             <div class="row-space-between">
-                <h5 class="mt-0 mb-1">List-based media object</h5>
-                <span class="topic">java</span>
+                <h5 class="mt-0 mb-1">{{this.subject}}</h5>
+                <span class="topic">{{this.topic}}</span>
             </div>
             {{ellipsis this.message}}
             <div class="row-space-between">
                 <span><small class="font-weight-lighter font-italic">{{parseDate this.created_at}}</small></span>
-                <span class="font-weight-lighter font-italic">7 replies</span>
+                <span class="font-weight-lighter font-italic replies">7 replies</span>
             </div>
         </div>
     </li>
