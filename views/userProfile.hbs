@@ -16,8 +16,10 @@
             <div class="d-flex flex-column">
                 <div class="d-flex justify-content-between">
                     <h5 class="likesPosts">
-                        <span>{{user.likes}} Likes&nbsp;&nbsp;</span>
-                        <button id="likeBtn" class="btn btn-primary btn-sm rounded-circle" type="submit">+</button>
+                        <form action="/profile/{{user.id}}" method="post">
+                            <span>{{user.likes}} Likes&nbsp;&nbsp;</span>
+                            <button id="likeBtn" class="btn btn-primary btn-sm rounded-circle" type="submit">+</button>
+                        </form>
                     </h5>
                 </div>
                 <div>
