@@ -41,6 +41,7 @@ html, body{
     margin-top:3%;
     padding-top: 2%;
     padding-bottom: 2%;
+    color:black;
 }
 
 .chats div:nth-of-type(1){
@@ -69,6 +70,7 @@ html, body{
 .chats:hover{
     background-color: lightsteelblue;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .senderInfo div{
