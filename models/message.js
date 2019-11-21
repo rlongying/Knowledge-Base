@@ -35,26 +35,66 @@ const seedMessages = () => {
   // db.query(sql2, [values2]);
 };
 
-const getTalkList = (userId) => {
+const getTalkList = async () => {
     // return db.query(`SELECT * FROM message_topic WHERE user_from_id = ${userId} OR user_to_id = ${userId}`);
-    return db.query(`SELECT * FROM message_topic
-                        INNER JOIN user
-                        ON user.id = message_topic.user_from_id
-                        WHERE user_from_id = 1 OR user_to_id = 1`);
+    let result = await db.query(`SELECT latestDate, subject, fromUser.first_name fromFName, fromUser.last_name fromLName, user.first_name toFName, user.last_name toLName,
+                      fromUser.image fromImage, user.image toImage, user.id toUserId, fromUser.topic_id topic_id
+                      FROM message_topic
+                      INNER JOIN user
+                      ON user.id = message_topic.user_to_id
+                      INNER JOIN (select topic_id, max(created_at) latestDate from message
+                            group by topic_id) message
+                      ON message.topic_id = message_topic.id
+                      INNER JOIN (SELECT image, message_topic.id topic_id, first_name, last_name FROM message_topic
+                      INNER JOIN user
+                      ON user.id = message_topic.user_from_id) fromUser
+                      ON message_topic.id = fromUser.topic_id
+                      WHERE user_from_id = 1 OR user_to_id = 1
+                      order by message_topic.id asc`);
+                      // sorry guys, just ignore this monstrous sql query. I need it..
+    return result;
 };
-const getMessages = (userId) => {
-  // return db.query(`SELECT * FROM message_topic WHERE user_from_id = ${userId} OR user_to_id = ${userId}`);
-  return db.query(`SELECT * FROM message
+const getMessages = async (topic_id) => {
+  let result = await db.query(`SELECT * FROM message
                   INNER JOIN user ON user.id = message.user_id
                   INNER JOIN message_topic ON message_topic.id = message.topic_id
-                  WHERE topic_id = 1
-                  ORDER BY created_at asc`);
+                  WHERE topic_id = ${topic_id}
+                  ORDER BY created_at asc, time asc`);
+  return result;
 };
 
+
+
+const sendMessage = (topic_id, message) => {
+  let date = new Date();
+  let minute
+  let hour
+
+  //refine minute
+  if(date.getMinutes().toString().length == 1){
+    minute = "0" + date.getMinutes();
+  } else {
+    minute = date.getMinutes();
+  }
+  //refine hour
+  if(date.getHours().toString().length == 1){
+    hour = "0" + date.getHours();
+  } else {
+    hour = date.getHours();
+  }
+
+  let time =  hour + ":" + minute;
+  let created_at = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  let sql = `INSERT INTO 
+            message(user_id, topic_id, message, created_at, time)
+            VALUES(1, ${topic_id}, "${message}", "${created_at}", "${time}")`;
+  db.execute(sql);
+}
 
 
 module.exports = {
     getTalkList: getTalkList,
     getMessages: getMessages,
     seed: seedMessages,
+    sendMessage: sendMessage
 };

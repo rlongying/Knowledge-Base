@@ -2,40 +2,42 @@
 <div id="mainDiv">
     <div id="chatList" class="overflow-auto">
         {{#each chatList}}
-        <div class='chats'>
-            <div class=""><img class='rounded-circle'src="{{this.image}}" alt=""></div>
+        <a class='chats' href="/messages/list/{{this.topic_id}}">
+            <div class=""><img class='rounded-circle'src="{{this.toImage}}" alt=""></div>
             <div class="">
                 <div>
-                    <div>{{this.first_name}} {{this.last_name}}</div><div>Oct 10</div>
+                    <div>{{this.toFName}} {{this.toLName}}</div><div>{{this.latestDate}}</div>
                 </div>
                 <div>{{this.subject}}</div>
             </div>
-        </div>
+        </a>
         <hr>
         {{/each}}
     </div>
     <div id="messages">
         <div id='messages-messageArea' class='overflow-auto'>
             {{#each messageList}}
-            <div class="meesages-each d-flex">
-                <div class="profilePic-message"><img class='rounded-circle'src="{{this.image}}" alt=""></div>
-                <div class="col-lg-10">
-                    <div class="senderInfo d-flex">
-                        <div>{{this.first_name}} {{this.last_name}}</div>
-                        <div>&#9900</div>
-                        <div>{{this.created_at}}</div>
-                    </div>
-                    <div>
-                        {{this.message}}
+            <hr class='hr-text' data-content="{{this.[0].created_at}}">
+                {{#each this}}
+                <div class="meesages-each d-flex">
+                    <div class="profilePic-message"><img class='rounded-circle'src="{{this.image}}" alt=""></div>
+                    <div class="col-lg-10">
+                        <div class="senderInfo d-flex">
+                            <div>{{this.first_name}} {{this.last_name}}</div>
+                            <div>&#9900</div>
+                            <div>{{this.time}}</div>
+                        </div>
+                        <div>
+                            {{this.message}}
+                        </div>
                     </div>
                 </div>
-            </div>
+                {{/each}}
             {{/each}}
-            {{!-- <hr class='date-divider'> --}} 
         </div>
-        <div id='messages-sendArea' class='d-flex'>
-            <textarea class='form-control'></textarea>
-            <button class='btn btn-info'>Send</button>
-        </div>
+        <form action='/messages/list/{{messageList.[0].[0].topic_id}}/send' method='post' id='messages-sendArea' class='d-flex'>
+            <textarea class='form-control' name="message" form="messages-sendArea"></textarea>
+            <button class='btn btn-info' type='submit'>Send</button>
+        </form>
     </div>
 </div>
