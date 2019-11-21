@@ -65,8 +65,30 @@ const getMessages = async (topic_id) => {
 
 
 
-const sendMessage = () => {
-  let sql = ``;
+const sendMessage = (topic_id, message) => {
+  let date = new Date();
+  let minute
+  let hour
+
+  //refine minute
+  if(date.getMinutes().toString().length == 1){
+    minute = "0" + date.getMinutes();
+  } else {
+    minute = date.getMinutes();
+  }
+  //refine hour
+  if(date.getHours().toString().length == 1){
+    hour = "0" + date.getHours();
+  } else {
+    hour = date.getHours();
+  }
+
+  let time =  hour + ":" + minute;
+  let created_at = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  let sql = `INSERT INTO 
+            message(user_id, topic_id, message, created_at, time)
+            VALUES(1, ${topic_id}, "${message}", "${created_at}", "${time}")`;
+  db.execute(sql);
 }
 
 
@@ -74,4 +96,5 @@ module.exports = {
     getTalkList: getTalkList,
     getMessages: getMessages,
     seed: seedMessages,
+    sendMessage: sendMessage
 };

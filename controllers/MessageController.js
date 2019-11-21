@@ -50,7 +50,8 @@ exports.messagePage = async(req, res) => {
 };
 
 exports.messageSend = (req, res) => {
+    let message = req.body.message;
     let topic_id = req.params.topicId;
-
+    messageModel.sendMessage(topic_id, message);
     res.redirect(301,`/messages/list/${topic_id}`)
 }
