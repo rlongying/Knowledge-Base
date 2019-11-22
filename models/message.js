@@ -1,5 +1,10 @@
 let db = require("../util/database");
 
+
+/*
+* seeding data
+* being used when you need to add dummy data
+*/
 const seedMessages = () => {
   let sql1 =
     "insert into message(user_id, topic_id, message, created_at) values ?";
@@ -11,7 +16,6 @@ const seedMessages = () => {
   date.getDate()       + ' ' +
   date.getHours()      + ':' +
   date.getMinutes();
-  console.log(date);
 
 
   // let values1 = [
@@ -35,6 +39,11 @@ const seedMessages = () => {
   // db.query(sql2, [values2]);
 };
 
+/*
+* Get a list of chat room list by current user id with images, name and 
+* the last date of message transfered in each chat room
+*
+*/
 const getTalkList = async () => {
     // return db.query(`SELECT * FROM message_topic WHERE user_from_id = ${userId} OR user_to_id = ${userId}`);
     let result = await db.query(`SELECT latestDate, subject, fromUser.first_name fromFName, fromUser.last_name fromLName, user.first_name toFName, user.last_name toLName,
@@ -54,6 +63,13 @@ const getTalkList = async () => {
                       // sorry guys, just ignore this monstrous sql query. I need it..
     return result;
 };
+
+
+/*
+* get the list of messages as per chat room(by topic_id), which is sorted by 
+* transfered date.
+* this includes user id, images, time, date message and topic_id
+*/
 const getMessages = async (topic_id) => {
   let result = await db.query(`SELECT * FROM message
                   INNER JOIN user ON user.id = message.user_id
@@ -64,11 +80,15 @@ const getMessages = async (topic_id) => {
 };
 
 
-
-const sendMessage = (topic_id, message) => {
+/*
+* 1. Store a message requested by user.
+* 2. Refine data by the standard of database 
+*/
+const sendMessage = async (topic_id, message) => {
   let date = new Date();
   let minute
   let hour
+  let second
 
   //refine minute
   if(date.getMinutes().toString().length == 1){
@@ -84,17 +104,29 @@ const sendMessage = (topic_id, message) => {
   }
 
   let time =  hour + ":" + minute;
-  let created_at = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  let created_at = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "-" + date.getMinutes()+ ":" + date.getSeconds();
   let sql = `INSERT INTO 
             message(user_id, topic_id, message, created_at, time)
             VALUES(1, ${topic_id}, "${message}", "${created_at}", "${time}")`;
-  db.execute(sql);
+  await db.execute(sql);
 }
+
+const addTopic = async (subject, message, fromUser, toUser) => {
+  let sql_topic = `INSERT INTO message_topic(subject, user_from_id, user_to_id) VALUES ("${subject}", ${fromUser}, ${toUser})`;
+  await db.execute(sql_topic);
+  
+  let sql_TopicId = 'SELECT id from message_topic order by id desc limit 1';
+  let topicId = await db.query(sql_TopicId).then(([rows, fieldData]) => { return rows});
+  
+  await sendMessage(topicId[0].id, message);
+}
+
 
 
 module.exports = {
     getTalkList: getTalkList,
     getMessages: getMessages,
     seed: seedMessages,
-    sendMessage: sendMessage
+    sendMessage: sendMessage,
+    addTopic: addTopic
 };

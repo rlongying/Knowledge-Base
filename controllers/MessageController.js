@@ -13,7 +13,6 @@ exports.messagePage = async(req, res) => {
         return rows;
     });
 
-
     // handling talk list
     talkList.forEach(data => {
         var tmp = new Date(data.latestDate)
@@ -31,10 +30,12 @@ exports.messagePage = async(req, res) => {
     // handling message list
     let refinedList = new Array();
     let eachDay = new Array();
+    messageList[0].createa_at = messageList[0].created_at.slice(0,10);
     eachDay.push(messageList[0])
-    var createdAt = messageList[0].created_at
+    let createdAt = messageList[0].created_at;
 
     for(let i = 1; i < messageList.length; i++){
+        messageList[i].created_at = messageList[i].created_at.slice(0,10)
         if(createdAt == messageList[i].created_at){
             eachDay.push(messageList[i])
         } else {

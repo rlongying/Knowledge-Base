@@ -1,5 +1,6 @@
 let userModel = require('../models/user');
-let postModel = require("../models/post");
+let postModel = require('../models/post');
+let messageModel = require('../models/message')
 
 async function getProfile(req, res) {
     await userModel.getUserById(req.params.userId)
@@ -25,7 +26,22 @@ async function likeUser(req, res) {
     .catch(error => console.log("get profile error: " + error));
 };
 
+async function sendMessageView(req,res){
+
+    res.render('sendMessage',{sendMessageCSS: true});
+}
+
+async function sendMessage(req,res){
+    let subject = req.body.subject;
+    let message = req.body.message; 
+    await messageModel.addTopic(subject, message, 1, 11);
+
+    res.redirect('/messages/list/1');
+}
+
 module.exports = {
     getProfile : getProfile,
-    likeUser : likeUser
+    likeUser : likeUser,
+    sendMessageView : sendMessageView,
+    sendMessage : sendMessage
 };

@@ -36,8 +36,8 @@
             {{/each}}
         </div>
         <form action='/messages/list/{{messageList.[0].[0].topic_id}}/send' method='post' id='messages-sendArea' class='d-flex'>
-            <textarea class='form-control' name="message" form="messages-sendArea"></textarea>
-            <button class='btn btn-info' type='submit'>Send</button>
+            <textarea id='textarea' class='form-control' name="message" form="messages-sendArea"></textarea>
+            <button id='sendBtn'class='btn btn-info' type='submit'>Send</button>
         </form>
     </div>
 </div>

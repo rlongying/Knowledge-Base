@@ -1,6 +1,10 @@
 /* div {
     border-style: solid;
     border-width: 1px;
+}
+form {
+    border-style: solid;
+    border-width: 1px;
 } */
 
 html, body{
@@ -33,6 +37,9 @@ html, body{
 
 #messages-messageArea{
     height:90%;
+}
+#messages-sendArea{
+    margin-top:2%;
 }
 
 .chats{
@@ -122,3 +129,4 @@ html, body{
     color: #818078;
     background-color: #fcfcfa;
   }
+

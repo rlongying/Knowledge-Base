@@ -1,0 +1,20 @@
+{{>header}}
+<div id='entire-wrapper'>
+    <div id='img-side'>
+        <div id='img-wrapper'>
+            <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="">
+        </div>
+    </div>
+
+    <form action="/profile/1/send" method="post" id='form-side'>
+        <div class="form-group col-lg-10 info">
+            <input type="text" class="form-control" id="subject" placeholder="subject" name ='subject' form="form-side">
+        </div>
+        <div class="form-group col-lg-10 info">
+            <textarea type="text" class="form-control" id="messageDetail" placeholder="message detail" name='message' form="form-side"></textarea>
+        </div>
+        <div id='submitBtn' class="form-group col-lg-10 info">
+            <button type="submit" class="btn btn-info">SEND</button>
+        </div>
+    </form>
+</div>
