@@ -1,6 +1,8 @@
 let userModel = require('../models/user');
 let postModel = require('../models/post');
 let messageModel = require('../models/message')
+let nodemailer = require('nodemailer');
+
 
 async function getProfile(req, res) {
     await userModel.getUserById(req.params.userId)
@@ -35,6 +37,29 @@ async function sendMessage(req,res){
     let subject = req.body.subject;
     let message = req.body.message; 
     await messageModel.addTopic(subject, message, 1, 11);
+
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'knowledgebaseemailsender@gmail.com',
+          pass: 'P@$$w0rd123'
+        }
+      });
+      
+    let mailOptions = {
+        from: 'knowledgebaseemailsender@gmail.com',
+        to: 'benjaminlee.kr@gmail.com',
+        subject: 'You got a new meesage',
+        text: subject + "\n" + message
+      };
+      
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
 
     res.redirect('/messages/list/1');
 }
