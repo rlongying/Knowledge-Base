@@ -2,10 +2,10 @@
 <div class="d-flex justify-content-around" >
     <div id='left-col'>
         <div class='profile-img-wrapper'>
-            <img id='proPic' src="https://randomuser.me/api/portraits/med/women/12.jpg" alt="">
+            <img id='proPic' src="{{user.image}}" alt="">
         </div>
-        <div>Sean Williamson</div>
-        <div>10 year of experience working in tech</div>
+        <div>{{user.first_name}} {{user.last_name}}</div>
+        <div>{{user.about}}</div>
         <div>
             <table class='table'>
                 <tbody>
@@ -19,7 +19,7 @@
                     </tr>
                     <tr>
                         <td>Likes</td>
-                        <td>12</td>
+                        <td>{{user.likes}}</td>
                     </tr>
                 </tbody>
             </table>

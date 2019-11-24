@@ -20,6 +20,13 @@ const registerUser = user => {
     return db.query(sql, [firstname, lastname, email, password, img, description, country, dob]);
 }
 
+const userLogin = user => {
+    const { email, password } = user;
+    let sql =
+    "SELECT * FROM user WHERE email = ? AND password = ?";
+    return db.query(sql, [email, password]);
+}
+
 /**
  * get user with the specified id
  * this method returns a promise
@@ -42,5 +49,6 @@ module.exports = {
     test : test,
     getUserById : getUserById,
     likeUser : likeUser,
-    registerUser :registerUser
+    registerUser : registerUser,
+    userLogin : userLogin
 };

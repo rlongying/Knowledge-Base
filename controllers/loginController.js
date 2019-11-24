@@ -4,15 +4,25 @@ let userModel = require('../models/user');
 exports.loginPage = (req, res) => {
     res.render('login', {loginCSS: true });
 };
+
+exports.login = (req, res) => {
+    userModel.userLogin(req.body)
+    .then(([rows, field]) => {
+        if(rows.length > 0){
+            res.render('home', {homeCSS: true, user: rows[0] });
+        } else {
+            res.render('login', {loginCSS: true, loginFail: true})
+        }
+    })
+    .catch((error) => console.log("login error: " + error));
+};
  
 exports.registerPage = (req, res) => {
     res.render('signup', {registerCSS: true, userInfo: req.body });
 };
 
 exports.register = (req, res) => {
-    const { firstname , lastname, email, password, img, description, country, dob } = req.body;
-    let user = { firstname , lastname, email, password, img, description, country, dob };
-    userModel.registerUser(user)
+    userModel.registerUser(req.body)
     .then(([rows, field]) => {
         res.render('home', {homeCSS: true });
     })

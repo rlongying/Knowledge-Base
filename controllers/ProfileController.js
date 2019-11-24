@@ -9,7 +9,6 @@ async function getProfile(req, res) {
     .then(([rows, field]) => {
         postModel.getPostsByUserId(rows[0].id)
         .then(([postrows, field]) => {
-            console.log(postrows);
             res.render('userProfile', {profileCSS: true, postCSS: true, user: rows[0], posts: postrows });
         }).catch(error => console.log("get user posts error: " + error));
     })
