@@ -2,13 +2,18 @@ let userModel = require('../models/user');
 
 
 exports.loginPage = (req, res) => {
-    res.render('login', {loginCSS: true });
+    if(req.session.user !== undefined) {
+        res.render('home', {homeCSS: true, user: req.session.user });
+    } else {
+        res.render('login', {loginCSS: true });
+    }
 };
 
 exports.login = (req, res) => {
     userModel.userLogin(req.body)
     .then(([rows, field]) => {
         if(rows.length > 0){
+            req.session.user = rows[0];
             res.render('home', {homeCSS: true, user: rows[0] });
         } else {
             res.render('login', {loginCSS: true, loginFail: true})

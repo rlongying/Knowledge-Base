@@ -2,6 +2,7 @@ let express = require("express");
 let bodyParser = require("body-parser");
 let path = require("path");
 let expressHbs = require("express-handlebars");
+let session = require("express-session");
 let messageRouter = require("./routes/message")
 let loginRouter = require("./routes/login");
 let homeRouter = require("./routes/home");
@@ -28,9 +29,16 @@ app.engine(
     helpers: helpers
   })
 );
-
 app.set("view engine", "hbs");
 app.set("views", "views");
+
+app.use(session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: true,
+    
+}));
+
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(loginRouter);
