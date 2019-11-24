@@ -8,10 +8,10 @@
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="email">
+                        <input type="email" class="form-control" placeholder="email">
                     </div>
                     <div class="form-group col-md-4">
-                        <input type="password" class="form-control" id="inputPassword4" placeholder="password">
+                        <input type="password" class="form-control" placeholder="password">
                     </div>
                     <div class="form-group col-md-4">
                         <button type="submit" class="btn btn-info">Log In</button>
@@ -21,23 +21,23 @@
         </div>
         <div id='slogan'>Join the worlds largest community for knowledge sharing</div>
         <div>
-            <form>
+            <form action= "/signup" method="POST" >
                 <div id="name" class="form-ro col-lg-7">
                     <div class="form-group col-md-6">
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="firstname">
+                        <input type="text" class="form-control" name="firstname" placeholder="firstname" required="required">
                     </div>
                     <div class="form-group col-md-6">
-                        <input type="password" class="form-control" id="inputPassword4" placeholder="lastname">
+                        <input type="text" class="form-control" name="lastname" placeholder="lastname" required="required">
                     </div>
                 </div>
                 <div class="form-group col-lg-7 info">
-                    <input type="text" class="form-control" id="inputAddress" placeholder="email">
+                    <input type="email" class="form-control" name="email" placeholder="email" required="required">
                 </div>
                 <div class="form-group col-lg-7 info">
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="password" required="required">
                 </div>
                 <div class="form-group col-lg-7 info">
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="password confirm">
+                    <input type="password" class="form-control" id="passwordConfirm" placeholder="password confirm" required="required">
                 </div>
                 <div id='submitBtn' class="form-group col-lg-7 info">
                     <button type="submit" class="btn btn-info">Sign Up</button>

@@ -9,6 +9,18 @@ async function test() {
 }
 
 /**
+ * adds a user to the database
+ * this method returns a promise
+ * @param {Object} user 
+ */
+const registerUser = user => {
+    const { firstname , lastname, email, password, img, description, country, dob } = user;
+    let sql =
+    "INSERT INTO user(first_name, last_name, email, password, image, about, country, birth_date) values (?,?,?,?,?,?,?,?)";
+    return db.query(sql, [firstname, lastname, email, password, img, description, country, dob]);
+}
+
+/**
  * get user with the specified id
  * this method returns a promise
  * @param {Number} userId
@@ -29,5 +41,6 @@ const likeUser = userId => {
 module.exports = {
     test : test,
     getUserById : getUserById,
-    likeUser : likeUser
+    likeUser : likeUser,
+    registerUser :registerUser
 };

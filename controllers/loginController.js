@@ -6,5 +6,15 @@ exports.loginPage = (req, res) => {
 };
  
 exports.registerPage = (req, res) => {
-    res.render('signup', {registerCSS: true });
+    res.render('signup', {registerCSS: true, userInfo: req.body });
+};
+
+exports.register = (req, res) => {
+    const { firstname , lastname, email, password, img, description, country, dob } = req.body;
+    let user = { firstname , lastname, email, password, img, description, country, dob };
+    userModel.registerUser(user)
+    .then(([rows, field]) => {
+        res.render('home', {homeCSS: true });
+    })
+    .catch((error) => console.log("error: " + error));
 };
