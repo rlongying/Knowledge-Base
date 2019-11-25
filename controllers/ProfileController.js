@@ -5,6 +5,7 @@ let nodemailer = require('nodemailer');
 
 
 async function getProfile(req, res) {
+  if(req.session.user !== undefined) {
     await userModel.getUserById(req.params.userId)
     .then(([rows, field]) => {
         postModel.getPostsByUserId(rows[0].id)
@@ -13,6 +14,9 @@ async function getProfile(req, res) {
         }).catch(error => console.log("get user posts error: " + error));
     })
     .catch(error => console.log("get profile error: " + error));
+  } else {
+      res.redirect('/');
+  }
 };
 
 async function likeUser(req, res) {
