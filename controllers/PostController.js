@@ -6,7 +6,7 @@ exports.getPostsByContent = (req, res) => {
   postModel
     .getPostsByContent(msg)
     .then(([rows, fields]) => {
-      res.render("partials/posts", { postCSS: true, posts: rows });
+      res.render("postResults", { postCSS: true, posts: rows });
     })
     .catch(error => console.log("get posts by content error: " + error));
 };
@@ -29,7 +29,7 @@ exports.getPostDetail = (req, res) => {
     .then(({ post, comments }) => {
       // res.json({ post, comments, user: req.session.user.id });
 
-      res.render("partials/post", {
+      res.render("postResults", {
         postCSS: true,
         post,
         comments,
@@ -65,7 +65,7 @@ exports.getLatestPosts = (req, res) => {
     .getLatestPosts()
     .then(([rows, fields]) => {
       // res.json(rows);
-      res.render("partials/posts", { postCSS: true, posts: rows });
+      res.render("postResults", { postCSS: true, posts: rows });
     })
     .catch(err => console.log("get latest posts error: " + err));
 };
