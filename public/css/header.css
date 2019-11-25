@@ -1,0 +1,18 @@
+#home{
+    font-size:200%;
+    font-family: 'Arial Narrow';
+    cursor:pointer;
+}
+div{
+    border-style: bold;
+    border-width: 1px;
+}
+mark{
+    margin:0;
+    padding:0;
+    color:#0195FF;
+}
+#nav{
+    padding:0;
+    padding-right:5%;
+}
