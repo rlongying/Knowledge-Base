@@ -30,6 +30,7 @@ const getLatestPosts = () => {
             p.created_at	AS created_at, 
             p.subject		  AS subject, 
             p.topic			  AS topic,
+            p.user_id     AS user_id,
             count(c.id)		AS replies
         FROM post AS p
           JOIN user AS u
@@ -140,6 +141,7 @@ const getPostsByUserId = userId => {
             p.created_at	AS created_at, 
             p.subject		  AS subject, 
             p.topic			  AS topic,
+            p.user_id     AS user_id,
             count(c.id)		AS replies
         FROM post AS p
           JOIN user AS u

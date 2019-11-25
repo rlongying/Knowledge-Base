@@ -3,7 +3,7 @@ let userModel = require('../models/user');
 
 exports.loginPage = (req, res) => {
     if(req.session.user !== undefined) {
-        res.render('home', {homeCSS: true, user: req.session.user });
+        res.redirect('/home');
     } else {
         res.render('login', {loginCSS: true });
     }
@@ -14,7 +14,7 @@ exports.login = (req, res) => {
     .then(([rows, field]) => {
         if(rows.length > 0){
             req.session.user = rows[0];
-            res.render('home', {homeCSS: true, user: rows[0] });
+            res.redirect('/home');
         } else {
             res.render('login', {loginCSS: true, loginFail: true})
         }
@@ -29,7 +29,7 @@ exports.registerPage = (req, res) => {
 exports.register = (req, res) => {
     userModel.registerUser(req.body)
     .then(([rows, field]) => {
-        res.render('home', {homeCSS: true });
+        res.redirect('/home');
     })
     .catch((error) => console.log("error: " + error));
 };
