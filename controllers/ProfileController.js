@@ -28,14 +28,33 @@ async function likeUser(req, res) {
 };
 
 async function sendMessageView(req,res){
+  let currentUserId = req.params.userId;
+  let userInfo;
+  await userModel.getUserById(currentUserId)
+  .then(([rows, field]) => {
+    userInfo = rows;
+  })
+  .catch((error) => console.log("error: " + error));
 
-    res.render('sendMessage',{sendMessageCSS: true});
+  res.render('sendMessage',{userInfo: userInfo, sendMessageCSS: true});
 }
 
 async function sendMessage(req,res){
+    let currentUserId = req.session.user.id;
     let subject = req.body.subject;
     let message = req.body.message; 
-    await messageModel.addTopic(subject, message, 1, 11);
+    let sendToUser = req.params.userId;
+    
+
+
+    let toUserInfo;
+    await userModel.getUserById(sendToUser)
+    .then(([rows, field]) => {
+      toUserInfo = rows;
+    })
+    .catch((error) => console.log("error: " + error));
+
+    await messageModel.addTopic(subject, message, currentUserId, sendToUser);
 
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -47,7 +66,7 @@ async function sendMessage(req,res){
       
     let mailOptions = {
         from: 'knowledgebaseemailsender@gmail.com',
-        to: 'benjaminlee.kr@gmail.com',
+        to: `${toUserInfo[0].email}`,
         subject: 'You got a new meesage',
         text: subject + "\n" + message
       };
@@ -60,7 +79,7 @@ async function sendMessage(req,res){
         }
       });
 
-    res.redirect('/messages/list/1');
+    res.redirect(`/messages/list/${currentUserId}`);
 }
 
 module.exports = {

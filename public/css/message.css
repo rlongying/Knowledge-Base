@@ -130,3 +130,12 @@ html, body{
     background-color: #fcfcfa;
   }
 
+  .img-wrapper {
+    width:20%;
+    height:20%;
+  }
+  .img-on-list {
+    max-width:100%;
+    max-height: 100%;
+  }
+

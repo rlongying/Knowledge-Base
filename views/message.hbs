@@ -3,7 +3,7 @@
     <div id="chatList" class="overflow-auto">
         {{#each chatList}}
         <a class='chats' href="/messages/list/{{../userId}}/{{this.topic_id}}">
-            <div class=""><img class='rounded-circle'src="{{this.toImage}}" alt=""></div>
+            <div class="img-wrapper"><img class='img-on-list rounded-circle'src="{{this.toImage}}" alt=""></div>
             <div class="">
                 <div>
                     <div>{{this.toFName}} {{this.toLName}}</div><div>{{this.latestDate}}</div>
