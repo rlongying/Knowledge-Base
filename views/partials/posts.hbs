@@ -10,7 +10,8 @@
             {{ellipsis this.message}}
             <div class="row-space-between">
                 <span><small class="font-weight-lighter font-italic">{{parseDate this.created_at}}</small></span>
-                <span class="font-weight-lighter font-italic replies">{{this.replies}} replies</span>
+                <span class="font-weight-lighter font-italic replies"><a href="/posts/post/{{this.id}}">{{this.replies}}
+                        replies</a></span>
             </div>
         </div>
     </li>
