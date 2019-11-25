@@ -67,7 +67,17 @@ const getPostById = async postId => {
      `
   );
   const [comments, commentFields] = await db.query(
-    `SELECT * FROM comment WHERE post_id = ${postId}`
+    `SELECT 
+          u.image       AS image,
+          c.id    		  AS id, 
+          c.message		  AS message, 
+          c.created_at	AS created_at, 
+          c.post_id		  AS post_id, 
+          c.user_id			AS user_id
+    FROM comment AS c
+    JOIN user AS u
+      ON c.user_id = u.id
+    WHERE c.post_id = ${postId}`
   );
 
   return { post: post[0], comments };

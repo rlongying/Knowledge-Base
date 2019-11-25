@@ -1,0 +1,32 @@
+<div class="media">
+    <img src={{post.image}} class="mr-3 post-img" alt="user pic">
+    <div class="media-body">
+        <div class="row-space-between">
+            <h5 class="mt-0 mb-1">{{post.subject}}</h5>
+            <span class="topic">{{post.topic}}</span>
+        </div>
+        {{ellipsis post.message}}
+
+        <ul class="list-unstyled mt-5">
+            {{#each comments}}
+            <li class="media mb-3">
+                <img src={{this.image}} class="mr-3 post-img" alt="">
+                <div class="media-body align-middle">
+                    {{ellipsis this.message}}
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+
+        <form class="mt-5 d-flex flex-column" action="/posts/post/addComment" method="POST">
+            <div class="form-group">
+                <input type="text" name="created_at" value="{{now}}" hidden>
+                <input type="text" name="post_id" value="{{post.id}}" hidden>
+                <input type="text" name="user_id" value="{{user}}" hidden>
+                <textarea type="text" class="form-control" name="message" rows="5"
+                    placeholder="add your reply....."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary align-self-end">comment</button>
+        </form>
+    </div>
+</div>

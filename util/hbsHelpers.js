@@ -41,7 +41,13 @@ const parseDate = date => {
   return date;
 };
 
+const currentTime = () => {
+  let now = new Date();
+  return now.toISOString().substr(0, 10);
+};
+
 module.exports = {
   ellipsis: ellipsisText,
-  parseDate: parseDate
+  parseDate: parseDate,
+  now: currentTime
 };
