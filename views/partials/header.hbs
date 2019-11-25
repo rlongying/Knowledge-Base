@@ -17,17 +17,20 @@
         padding:0;
         padding-right:5%;
     }
+
 </style>
 
 <nav id="nav" class="navbar navbar-light bg-light">
   <div class='navbar justify-content-start'>
-    <a id='home' class="navbar-brand">k<mark class='blue'>b</mark></a>
+    <a href="/" id='home' class="navbar-brand">k<mark class='blue'>b</mark></a>
     <form class="form-inline">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-info" type="submit">Search</button>
     </form>
   </div>
-  <button class="btn btn-info" type="submit">sign out</button>
+  <form action='/' method='post'>
+      <button class="btn btn-info">sign out</button>
+  </form>
 </nav>
 
 

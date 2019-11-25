@@ -44,8 +44,7 @@ const seedMessages = () => {
 * the last date of message transfered in each chat room
 *
 */
-const getTalkList = async () => {
-    // return db.query(`SELECT * FROM message_topic WHERE user_from_id = ${userId} OR user_to_id = ${userId}`);
+const getTalkList = async (currentUserId) => {
     let result = await db.query(`SELECT latestDate, subject, fromUser.first_name fromFName, fromUser.last_name fromLName, user.first_name toFName, user.last_name toLName,
                       fromUser.image fromImage, user.image toImage, user.id toUserId, fromUser.topic_id topic_id
                       FROM message_topic
@@ -58,7 +57,7 @@ const getTalkList = async () => {
                       INNER JOIN user
                       ON user.id = message_topic.user_from_id) fromUser
                       ON message_topic.id = fromUser.topic_id
-                      WHERE user_from_id = 1 OR user_to_id = 1
+                      WHERE user_from_id = ${currentUserId} OR user_to_id = ${currentUserId}
                       order by message_topic.id asc`);
                       // sorry guys, just ignore this monstrous sql query. I need it..
     return result;
@@ -88,7 +87,6 @@ const sendMessage = async (topic_id, message) => {
   let date = new Date();
   let minute
   let hour
-  let second
 
   //refine minute
   if(date.getMinutes().toString().length == 1){

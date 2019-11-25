@@ -2,7 +2,7 @@
 <div id="mainDiv">
     <div id="chatList" class="overflow-auto">
         {{#each chatList}}
-        <a class='chats' href="/messages/list/{{this.topic_id}}">
+        <a class='chats' href="/messages/list/{{../userId}}/{{this.topic_id}}">
             <div class=""><img class='rounded-circle'src="{{this.toImage}}" alt=""></div>
             <div class="">
                 <div>
@@ -35,7 +35,7 @@
                 {{/each}}
             {{/each}}
         </div>
-        <form action='/messages/list/{{messageList.[0].[0].topic_id}}/send' method='post' id='messages-sendArea' class='d-flex'>
+        <form action='/messages/list/{{userId}}/{{messageList.[0].[0].topic_id}}/send' method='post' id='messages-sendArea' class='d-flex'>
             <textarea id='textarea' class='form-control' name="message" form="messages-sendArea"></textarea>
             <button id='sendBtn'class='btn btn-info' type='submit'>Send</button>
         </form>

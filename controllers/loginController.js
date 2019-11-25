@@ -33,3 +33,8 @@ exports.register = (req, res) => {
     })
     .catch((error) => console.log("error: " + error));
 };
+
+exports.logout = (req, res) => {
+    req.session.user = undefined;
+    res.render('login', {loginCSS: true });
+};

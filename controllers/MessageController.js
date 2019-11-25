@@ -4,14 +4,21 @@ let messageModel = require('../models/message');
 exports.messagePage = async(req, res) => {
 
     // messageModel.seed();
+    let currentUserId = req.session.user.id;
+
 
     let topic_id = req.params.topicId;
-    let talkList = await messageModel.getTalkList().then(([rows, fieldData]) => {
+    let messageList;
+    if(topic_id){
+        messageList = await messageModel.getMessages(topic_id).then(([rows, fieldData]) => {
+            return rows;
+        });
+    }
+
+    let talkList = await messageModel.getTalkList(currentUserId).then(([rows, fieldData]) => {
         return rows;
     });         
-    let messageList = await messageModel.getMessages(topic_id).then(([rows, fieldData]) => {
-        return rows;
-    });
+    
 
     // handling talk list
     talkList.forEach(data => {
@@ -28,26 +35,31 @@ exports.messagePage = async(req, res) => {
     });
     
     // handling message list
-    let refinedList = new Array();
-    let eachDay = new Array();
-    messageList[0].createa_at = messageList[0].created_at.slice(0,10);
-    eachDay.push(messageList[0])
-    let createdAt = messageList[0].created_at;
+    let refinedList;
+    let eachDay;
+    let createdAt;
+    if(topic_id){
+        refinedList = new Array();
+        eachDay = new Array();
+        messageList[0].createa_at = messageList[0].created_at.slice(0,10);
+        eachDay.push(messageList[0])
+        createdAt = messageList[0].created_at;
 
-    for(let i = 1; i < messageList.length; i++){
-        messageList[i].created_at = messageList[i].created_at.slice(0,10)
-        if(createdAt == messageList[i].created_at){
-            eachDay.push(messageList[i])
-        } else {
-            createdAt = messageList[i].created_at;
-            refinedList.push(eachDay);
-            eachDay = [];
-            eachDay.push(messageList[i])
+        for(let i = 1; i < messageList.length; i++){
+            messageList[i].created_at = messageList[i].created_at.slice(0,10)
+            if(createdAt == messageList[i].created_at){
+                eachDay.push(messageList[i])
+            } else {
+                createdAt = messageList[i].created_at;
+                refinedList.push(eachDay);
+                eachDay = [];
+                eachDay.push(messageList[i])
+            }
         }
+        refinedList.push(eachDay);
     }
-    refinedList.push(eachDay);
 
-    res.render('message', { chatList: talkList, messageList: refinedList, messageCSS: true }); 
+    res.render('message', { chatList: talkList, messageList: refinedList, userId : currentUserId, messageCSS: true }); 
 };
 
 exports.messageSend = (req, res) => {
