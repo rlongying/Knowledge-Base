@@ -32,8 +32,15 @@ const getLatestPosts = () => {
  * this method returns a promise
  * @param {Number} postid
  */
-const getPostById = postId => {
-  return db.query(`SELECT * FROM post WHERE id = ${postId}`);
+const getPostById = async postId => {
+  const [post, postFields] = await db.query(
+    `SELECT * FROM post WHERE id = ${postId}`
+  );
+  const [comments, commentFields] = await db.query(
+    `SELECT * FROM comment WHERE post_id = ${postId}`
+  );
+
+  return { post: post[0], comments };
 };
 
 /**
@@ -65,6 +72,17 @@ const getPostsByUserId = userId => {
   return db.query(`SELECT * FROM post WHERE user_id = ${userId}`);
 };
 
+/**
+ * a comment includes: message, created_at, post_id, user_id
+ * @param {Object} comment
+ */
+const addComment = comment => {
+  const { message, created_at, post_id, user_id } = comment;
+  let sql =
+    "insert into comment(message, created_at, post_id, user_id) values (?,?,?,?)";
+  return db.query(sql, [message, created_at, post_id, user_id]);
+};
+
 module.exports = {
   seedPosts: seedPosts,
   getPost: getPostById,
@@ -72,5 +90,6 @@ module.exports = {
   getPostsByTopic: getPostsByTopic,
   getPostsByUserId: getPostsByUserId,
   getLatestPosts: getLatestPosts,
-  addPost: addPost
+  addPost: addPost,
+  addComment: addComment
 };

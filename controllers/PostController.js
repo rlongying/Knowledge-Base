@@ -26,11 +26,8 @@ exports.getPostDetail = (req, res) => {
 
   postModel
     .getPost(postId)
-    .then(([rows, fields]) => {
-      if (error)
-        if (rows) {
-          res.json(rows);
-        }
+    .then(({ post, comments }) => {
+      res.json({ post, comments });
     })
     .catch(error => console.log("get a post by id error: " + error));
 };
@@ -64,4 +61,13 @@ exports.getLatestPosts = (req, res) => {
       res.render("partials/posts", { postCSS: true, posts: rows });
     })
     .catch(err => console.log("get latest posts error: " + err));
+};
+
+exports.addComment = (req, res) => {
+  const { message, created_at, post_id, user_id } = req.body;
+
+  postModel
+    .addComment({ message, created_at, post_id, user_id })
+    .then(result => res.status(200).json(result))
+    .catch(err => console.log("add comment error: " + err));
 };
