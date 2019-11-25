@@ -1,8 +1,7 @@
 <ul class="list-unstyled">
     {{#each posts}}
     <li class="media mb-3">
-        <img src="https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-760x506.jpg"
-            class="mr-3 post-img" alt="">
+        <img src={{this.image}} class="mr-3 post-img" alt="">
         <div class="media-body">
             <div class="row-space-between">
                 <h5 class="mt-0 mb-1">{{this.subject}}</h5>
@@ -11,7 +10,7 @@
             {{ellipsis this.message}}
             <div class="row-space-between">
                 <span><small class="font-weight-lighter font-italic">{{parseDate this.created_at}}</small></span>
-                <span class="font-weight-lighter font-italic replies">7 replies</span>
+                <span class="font-weight-lighter font-italic replies">{{this.replies}} replies</span>
             </div>
         </div>
     </li>

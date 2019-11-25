@@ -22,7 +22,24 @@ const addPost = post => {
 };
 
 const getLatestPosts = () => {
-  let sql = `SELECT * FROM post ORDER BY created_at DESC LIMIT ${LATEST_POST}`;
+  let sql = `
+          SELECT 
+            u.image 		  AS image,
+            p.id    		  AS id, 
+            p.message		  AS message, 
+            p.created_at	AS created_at, 
+            p.subject		  AS subject, 
+            p.topic			  AS topic,
+            count(c.id)		AS replies
+        FROM post AS p
+          JOIN user AS u
+            ON p.user_id = u.id
+          LEFT JOIN comment AS c
+            ON p.id = c.post_id 
+        GROUP BY p.id
+        ORDER BY created_at
+        LIMIT  ${LATEST_POST}
+   `;
 
   return db.query(sql);
 };
@@ -34,7 +51,19 @@ const getLatestPosts = () => {
  */
 const getPostById = async postId => {
   const [post, postFields] = await db.query(
-    `SELECT * FROM post WHERE id = ${postId}`
+    `
+      SELECT 
+          u.image       AS image,
+          p.id    		  AS id, 
+          p.message		  AS message, 
+          p.created_at	AS created_at, 
+          p.subject		  AS subject, 
+          p.topic			  AS topic
+      FROM post AS p
+      JOIN user AS u
+        ON p.user_id = u.id
+      WHERE p.id = ${postId}
+     `
   );
   const [comments, commentFields] = await db.query(
     `SELECT * FROM comment WHERE post_id = ${postId}`
@@ -50,7 +79,24 @@ const getPostById = async postId => {
  */
 const getPostsByContent = msg => {
   // single quota around %${msg}% is necessary
-  return db.query(`SELECT * FROM post WHERE message LIKE '%${msg}%'`);
+  const sql = `
+        SELECT 
+            u.image 		  AS image,
+            p.id    		  AS id, 
+            p.message		  AS message, 
+            p.created_at	AS created_at, 
+            p.subject		  AS subject, 
+            p.topic			  AS topic,
+            count(c.id)		AS replies
+        FROM post AS p
+          JOIN user AS u
+            ON p.user_id = u.id
+          LEFT JOIN comment AS c
+            ON p.id = c.post_id
+        WHERE p.message LIKE '%${msg}%'
+        GROUP BY p.id
+   `;
+  return db.query(sql);
 };
 
 /**
@@ -60,7 +106,24 @@ const getPostsByContent = msg => {
  */
 const getPostsByTopic = topic => {
   // user single quota to wrap string type values when using string template
-  return db.query(`SELECT * FROM post WHERE topic = '${topic}'`);
+  const sql = `
+        SELECT 
+            u.image 		  AS image,
+            p.id    		  AS id, 
+            p.message		  AS message, 
+            p.created_at	AS created_at, 
+            p.subject		  AS subject, 
+            p.topic			  AS topic,
+            count(c.id)		AS replies
+        FROM post AS p
+          JOIN user AS u
+            ON p.user_id = u.id
+          LEFT JOIN comment AS c
+            ON p.id = c.post_id
+        WHERE topic = '${topic}'
+        GROUP BY p.id
+   `;
+  return db.query(sql);
 };
 
 /**
@@ -69,7 +132,24 @@ const getPostsByTopic = topic => {
  * @param {Number} userId
  */
 const getPostsByUserId = userId => {
-  return db.query(`SELECT * FROM post WHERE user_id = ${userId}`);
+  const sql = `
+        SELECT 
+            u.image 		  AS image,
+            p.id    		  AS id, 
+            p.message		  AS message, 
+            p.created_at	AS created_at, 
+            p.subject		  AS subject, 
+            p.topic			  AS topic,
+            count(c.id)		AS replies
+        FROM post AS p
+          JOIN user AS u
+            ON p.user_id = u.id AND u.id = ${userId}
+          LEFT JOIN comment AS c
+            ON p.id = c.post_id
+        GROUP BY p.id
+    `;
+
+  return db.query(sql);
 };
 
 /**
