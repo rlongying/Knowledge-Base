@@ -2,11 +2,8 @@ let messageModel = require('../models/message');
 
  
 exports.messagePage = async(req, res) => {
-
     // messageModel.seed();
     let currentUserId = req.session.user.id;
-
-
     let topic_id = req.params.topicId;
     let messageList;
     if(topic_id){
@@ -28,11 +25,13 @@ exports.messagePage = async(req, res) => {
         data.latestDate = month + " " + date; 
         
         if(data.toUserId == 1){
-            data.toFName = data.fromFName
-            data.toLName = data.fromLName
-            data.toImage = data.fromImage
+            data.toFName = data.fromFName;
+            data.toLName = data.fromLName;
+            data.toImage = data.fromImage;
         }
     });
+
+    console.log(talkList);
     
     // handling message list
     let refinedList;
@@ -62,9 +61,10 @@ exports.messagePage = async(req, res) => {
     res.render('message', { chatList: talkList, messageList: refinedList, userId : currentUserId, messageCSS: true }); 
 };
 
-exports.messageSend = (req, res) => {
+exports.messageSend = async (req, res) => {
     let message = req.body.message;
     let topic_id = req.params.topicId;
-    messageModel.sendMessage(topic_id, message);
-    res.redirect(301,`/messages/list/${topic_id}`)
+    let userId = req.params.userId;
+    await messageModel.sendMessage(topic_id, message);
+    res.redirect(301,`/messages/list/${userId}/${topic_id}`)
 }
