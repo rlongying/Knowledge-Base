@@ -4,7 +4,7 @@ let messageModel = require('../models/message');
 exports.messagePage = async(req, res) => {
     console.log("message url: " + req.url)
     // messageModel.seed();
-    let currentUserId = req.session.user.id;
+    let currentUserId = req.params.userId;
     let topic_id = req.params.topicId;
     let messageList;
     if(topic_id){
@@ -12,12 +12,11 @@ exports.messagePage = async(req, res) => {
             return rows;
         });
     }
-    console.log("messageList : " + messageList);
 
     let talkList = await messageModel.getTalkList(currentUserId).then(([rows, fieldData]) => {
         return rows;
     });         
-    
+    console.log(talkList)    
 
     // handling talk list
     talkList.forEach(data => {
@@ -26,7 +25,7 @@ exports.messagePage = async(req, res) => {
         var date = tmp.getDate() + 1;
         data.latestDate = month + " " + date; 
         
-        if(data.toUserId == 1){
+        if(data.fromUserId != currentUserId){
             data.toFName = data.fromFName;
             data.toLName = data.fromLName;
             data.toImage = data.fromImage;

@@ -46,19 +46,19 @@ const seedMessages = () => {
 */
 const getTalkList = async (currentUserId) => {
     let result = await db.query(`SELECT latestDate, subject, fromUser.first_name fromFName, fromUser.last_name fromLName, user.first_name toFName, user.last_name toLName,
-                      fromUser.image fromImage, user.image toImage, user.id toUserId, fromUser.topic_id topic_id
-                      FROM message_topic
-                      INNER JOIN user
-                      ON user.id = message_topic.user_to_id
-                      INNER JOIN (select topic_id, max(created_at) latestDate from message
-                            group by topic_id) message
-                      ON message.topic_id = message_topic.id
-                      INNER JOIN (SELECT image, message_topic.id topic_id, first_name, last_name FROM message_topic
-                      INNER JOIN user
-                      ON user.id = message_topic.user_from_id) fromUser
-                      ON message_topic.id = fromUser.topic_id
-                      WHERE user_from_id = ${currentUserId} OR user_to_id = ${currentUserId}
-                      order by message_topic.id asc`);
+                                fromUser.image fromImage, user.image toImage, fromUser.id fromUserId, fromUser.topic_id topic_id
+                                FROM message_topic
+                                INNER JOIN user
+                                ON user.id = message_topic.user_to_id
+                                INNER JOIN (select topic_id, max(created_at) latestDate from message
+                                      group by topic_id) message
+                                ON message.topic_id = message_topic.id
+                                INNER JOIN (SELECT user.id id, image, message_topic.id topic_id, first_name, last_name FROM message_topic
+                            INNER JOIN user
+                            ON user.id = message_topic.user_from_id) fromUser
+                                ON message_topic.id = fromUser.topic_id
+                                WHERE user_from_id = ${currentUserId} OR user_to_id = ${currentUserId}
+                                order by message_topic.id asc`);
                       // sorry guys, just ignore this monstrous sql query. I need it..
     return result;
 };
