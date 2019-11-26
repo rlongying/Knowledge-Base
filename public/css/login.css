@@ -1,21 +1,13 @@
-/* div{
-    border-style: solid;
-    border-width: 1px;
-} */
-
-body{
-    padding:3%;
-}
-
-
 #mainImage{
     max-width:100%;
     max-height:100%;
 }
 #leftSide{
+    width: 40%;
     padding:3%;
 }
 #rightSide{
+    width: 40%;
     padding:3%;
 }
 #imageDiv{
@@ -60,3 +52,18 @@ mark{
 #incorrectPassword{
     color: red;
 }
+#nav{
+    padding:0;
+}
+
+button {
+    background-color: #00A2E8 !important;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+  }

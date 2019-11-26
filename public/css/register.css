@@ -38,3 +38,7 @@ mark{
     margin:0;
     padding:0;
 }
+
+button {
+    background-color: #00A2E8 !important;
+}

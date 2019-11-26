@@ -3,7 +3,7 @@ let bodyParser = require("body-parser");
 let path = require("path");
 let expressHbs = require("express-handlebars");
 let session = require("express-session");
-let messageRouter = require("./routes/message")
+let messageRouter = require("./routes/message");
 let loginRouter = require("./routes/login");
 let homeRouter = require("./routes/home");
 const postRouter = require("./routes/post");
@@ -32,19 +32,24 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", "views");
 
-app.use(session({
+app.use(
+  session({
     secret: "secret",
     resave: false,
     saveUninitialized: true,
-    cookie: {secure: false,
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24
-    }
-}));
-
+    cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 }
+  })
+);
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(loginRouter);
+app.use((req, res, next) => {
+  if (req.session.user) {
+    next();
+  } else {
+    return res.redirect(301, "/");
+  }
+});
 app.use("/home", homeRouter);
 app.use("/messages", messageRouter);
 app.use("/posts", postRouter);
