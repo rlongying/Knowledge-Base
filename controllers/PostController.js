@@ -33,7 +33,8 @@ exports.getPostDetail = (req, res) => {
         postCSS: true,
         post,
         comments,
-        user: 11 //req.session.user.id
+        user: req.session.user.id,
+        postView: true
       });
     })
     .catch(error => console.log("get a post by id error: " + error));
@@ -77,4 +78,13 @@ exports.addComment = (req, res) => {
     .addComment({ message, created_at, post_id, user_id })
     .then(result => res.redirect(301, "/posts/post/" + post_id))
     .catch(err => console.log("add comment error: " + err));
+};
+
+exports.getTopics = (req, res) => {
+  postModel
+    .getTopics()
+    .then(([rows, fields]) => {
+      res.json(rows);
+    })
+    .catch(err => console.log("get topics error: " + err));
 };

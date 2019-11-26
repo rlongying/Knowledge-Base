@@ -59,6 +59,7 @@ const getPostById = async postId => {
           p.message		  AS message, 
           p.created_at	AS created_at, 
           p.subject		  AS subject, 
+          p.user_id     AS user_id,
           p.topic			  AS topic
       FROM post AS p
       JOIN user AS u
@@ -98,6 +99,7 @@ const getPostsByContent = msg => {
             p.created_at	AS created_at, 
             p.subject		  AS subject, 
             p.topic			  AS topic,
+            p.user_id     AS user_id,
             count(c.id)		AS replies
         FROM post AS p
           JOIN user AS u
@@ -125,6 +127,7 @@ const getPostsByTopic = topic => {
             p.created_at	AS created_at, 
             p.subject		  AS subject, 
             p.topic			  AS topic,
+            p.user_id     AS user_id,
             count(c.id)		AS replies
         FROM post AS p
           JOIN user AS u
@@ -175,6 +178,10 @@ const addComment = comment => {
   return db.query(sql, [message, created_at, post_id, user_id]);
 };
 
+const getTopics = () => {
+  return db.query("SELECT DISTINCT topic FROM post");
+};
+
 module.exports = {
   seedPosts: seedPosts,
   getPost: getPostById,
@@ -183,5 +190,6 @@ module.exports = {
   getPostsByUserId: getPostsByUserId,
   getLatestPosts: getLatestPosts,
   addPost: addPost,
-  addComment: addComment
+  addComment: addComment,
+  getTopics: getTopics
 };

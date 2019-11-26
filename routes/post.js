@@ -10,4 +10,5 @@ router.get("/search-by-topic/:topic", PostController.getPostsByTopic);
 router.get("/post/:postId", PostController.getPostDetail);
 router.get("/latest", PostController.getLatestPosts);
 router.post("/post/addComment", PostController.addComment);
+router.get("/topics", PostController.getTopics);
 module.exports = router;
