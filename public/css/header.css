@@ -17,3 +17,13 @@ mark{
     padding:0;
     padding-right:5%;
 }
+#searchBar{
+    display: inline-block !important;
+}
+#searchInput{
+    display: inline-block !important;
+}
+#logout, #searchBtn {
+    vertical-align: baseline !important;
+    background-color: #00A2E8 !important;
+}

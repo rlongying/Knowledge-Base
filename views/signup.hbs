@@ -1,29 +1,35 @@
-<div>
+
+<nav id="nav" class="navbar navbar-light">
     <div id='title' class='text-wrap'>knowledge<mark class='blue'>Base</mark></div>
-    <div class="d-flex">
-        <div class='explain'><div>Let us know a little more about you</div></div>
-        <form action="/register" method="POST">
-            <div id='rightDiv' class='form-row'>
-                <input type="hidden" name="firstname" value="{{userInfo.firstname}}">
-                <input type="hidden" name="lastname" value="{{userInfo.lastname}}">
-                <input type="hidden" name="email" value="{{userInfo.email}}">
-                <input type="hidden" name="password" value="{{userInfo.password}}">
-                <div class="form-group col-lg-7">
-                    <input type="imgURL" class="form-control" name="img" placeholder="imageurl">
-                </div>
-                <div class="form-group col-lg-7">
-                    <textarea class="form-control rounded-0" rows="3" name="description" placeholder="a few lines about yourself..." ></textarea>
-                </div>
-                <div class="form-group col-lg-7">
-                    <input type="text" class="form-control" name="country" placeholder="country">
-                </div>
-                <div class="form-group col-lg-7">
-                    <input type="date" class="form-control" name="dob" placeholder="date of birth(mm/dd/yyyy)">
-                </div>
-                <div id='submitBtn' class="form-group col-lg-7"> 
-                    <button type="submit" class="btn btn-info">complete registration</button>
-                </div>
+</nav>
+<div class="d-flex h-100">
+        <div class="d-flex vertical-center">
+            <div class='d-flex mt-auto mb-auto ml-auto explain justify-content-end w-25 mr-5'><div>Let us know a little more about you</div></div>
+            <div class="d-flex mt-auto mb-auto mr-auto w-25">
+                <form action="/register" method="POST">
+                    <div id='rightDiv' class='form-row'>
+                        <input type="hidden" name="firstname" value="{{userInfo.firstname}}">
+                        <input type="hidden" name="lastname" value="{{userInfo.lastname}}">
+                        <input type="hidden" name="email" value="{{userInfo.email}}">
+                        <input type="hidden" name="password" value="{{userInfo.password}}">
+                        <div class="form-group col-lg-7">
+                            <input type="imgURL" class="form-control" name="img" placeholder="imageurl">
+                        </div>
+                        <div class="form-group col-lg-7">
+                            <textarea class="form-control rounded-0" rows="3" name="description" placeholder="a few lines about yourself..." ></textarea>
+                        </div>
+                        <div class="form-group col-lg-7">
+                            <input type="text" class="form-control" name="country" placeholder="country">
+                        </div>
+                        <div class="form-group col-lg-7">
+                            <input type="date" class="form-control" name="dob" placeholder="date of birth(mm/dd/yyyy)">
+                        </div>
+                        <div id='submitBtn' class="form-group col-lg-7"> 
+                            <button type="submit" class="btn btn-info">complete registration</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
+        
 </div>
