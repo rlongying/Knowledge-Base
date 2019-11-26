@@ -83,7 +83,7 @@ const getMessages = async (topic_id) => {
 * 1. Store a message requested by user.
 * 2. Refine data by the standard of database 
 */
-const sendMessage = async (topic_id, message) => {
+const sendMessage = async (userId, topic_id, message) => {
   let date = new Date();
   let minute
   let hour
@@ -105,7 +105,7 @@ const sendMessage = async (topic_id, message) => {
   let created_at = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours()+ ":" + date.getMinutes() + ":" + date.getSeconds();
   let sql = `INSERT INTO 
             message(user_id, topic_id, message, created_at, time)
-            VALUES(1, ${topic_id}, "${message}", "${created_at}", "${time}")`;
+            VALUES(${userId}, ${topic_id}, "${message}", "${created_at}", "${time}")`;
   await db.execute(sql);
 }
 
@@ -116,7 +116,7 @@ const addTopic = async (subject, message, fromUser, toUser) => {
   let sql_TopicId = 'SELECT id from message_topic order by id desc limit 1';
   let topicId = await db.query(sql_TopicId).then(([rows, fieldData]) => { return rows});
   
-  await sendMessage(topicId[0].id, message);
+  await sendMessage(fromUser, topicId[0].id, message);
 }
 
 

@@ -86,9 +86,29 @@ async function sendMessage(req,res){
     res.redirect(`/messages/list/${currentUserId}`);
 }
 
+async function editProfile(req,res){
+  let currentUser = req.session.user;
+  let user;
+    await userModel.getUserById(currentUser.id)
+    .then(([rows, field]) => {
+      user = rows;
+    })
+    .catch((error) => console.log("error: " + error));
+  console.log(user)
+  res.render('editProfile', {editProfileCSS : true, user : user});
+}
+
+async function editConfirm(req,res){
+  await userModel.updateUser(req.session.user.id, req.body);
+
+  res.redirect('/home')
+}
+
 module.exports = {
     getProfile : getProfile,
     likeUser : likeUser,
     sendMessageView : sendMessageView,
-    sendMessage : sendMessage
+    sendMessage : sendMessage,
+    editProfile : editProfile,
+    editConfirm : editConfirm
 };

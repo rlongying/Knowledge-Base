@@ -2,6 +2,7 @@ let messageModel = require('../models/message');
 
  
 exports.messagePage = async(req, res) => {
+    console.log("message url: " + req.url)
     // messageModel.seed();
     let currentUserId = req.session.user.id;
     let topic_id = req.params.topicId;
@@ -11,7 +12,7 @@ exports.messagePage = async(req, res) => {
             return rows;
         });
     }
-    console.log(messageList);
+    console.log("messageList : " + messageList);
 
     let talkList = await messageModel.getTalkList(currentUserId).then(([rows, fieldData]) => {
         return rows;
@@ -65,6 +66,6 @@ exports.messageSend = async (req, res) => {
     let message = req.body.message;
     let topic_id = req.params.topicId;
     let userId = req.params.userId;
-    await messageModel.sendMessage(topic_id, message);
+    await messageModel.sendMessage(userId, topic_id, message);
     res.redirect(301,`/messages/list/${userId}/${topic_id}`)
 }

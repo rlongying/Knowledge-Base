@@ -3,6 +3,7 @@ let router = express.Router();
 let messageController = require("../controllers/MessageController");
 
 const checkuser = (req, res, next) => {
+    console.log("check url: " + req.rul)
     let currentUser = req.session.user.id
     let requestUser = req.params.userId
     if(currentUser != requestUser){

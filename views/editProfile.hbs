@@ -1,0 +1,21 @@
+{{>header}}
+<form action="/profile/{{user.[0].id}}/edit" method="post" id="editForm">
+    <div class="form-group col-lg-12 info">
+        <input type="text" class="form-control" name="image" placeholder="{{user.[0].image}}" required="required">
+    </div>
+    <div class="form-group col-lg-12 info">
+        <input type="text" class="form-control" name="fName" id="name" placeholder="{{user.[0].first_name}}" required="required">
+    </div>
+    <div class="form-group col-lg-12 info">
+        <input type="text" class="form-control" name="lName" id="name" placeholder="{{user.[0].last_name}}" required="required">
+    </div>
+    <div class="form-group col-lg-12 info">
+        <input type="text" class="form-control" name="country" id="country" placeholder="{{user.[0].country}}" required="required">
+    </div>
+    <div class="form-group col-lg-12">
+        <input type="date" class="form-control" name="date" placeholder="date of birth(mm/dd/yyyy)">
+    </div>
+    <div id='submitBtn' class="form-group col-lg-7 info">
+        <button type="submit" class="btn btn-info">Edit</button>
+    </div>
+</form>
