@@ -2,10 +2,10 @@
 <div class="d-flex justify-content-around" >
     <div id='left-col'>
         <div class='profile-img-wrapper'>
-            <img id='proPic' src="{{user.image}}" alt="">
+            <img id='proPic' src="{{user.[0].image}}" alt="">
         </div>
-        <div>{{user.first_name}} {{user.last_name}}</div>
-        <div>{{user.about}}</div>
+        <div>{{user.[0].first_name}} {{user.[0].last_name}}</div>
+        <div>{{user.[0].about}}</div>
         <div>
             <table class='table'>
                 <tbody>
@@ -24,7 +24,7 @@
                 </tbody>
             </table>
         </div>
-        <div>Edit Profile</div>
+        <a href="/profile/{{user.[0].id}}/edit">Edit Profile</a>
     </div>
     <div id='right-col'>
         <div>

@@ -32,8 +32,8 @@ const userLogin = user => {
  * this method returns a promise
  * @param {Number} userId
  */
-const getUserById = userId => {
-    return db.query(`SELECT * FROM user WHERE id = ${userId}`);
+const getUserById = async userId => {
+    return await db.query(`SELECT * FROM user WHERE id = ${userId}`);
 };
 
 /**
@@ -44,11 +44,27 @@ const getUserById = userId => {
 const likeUser = userId => {
     return db.query(`UPDATE user SET likes = likes + 1 WHERE id = ${userId}`);
 };
+
+/**
+ * edit user profile with current signed in user id
+ */
+
+ const updateUser = async (userId,userInfo) => {
+    return await db.query(`UPDATE user 
+                            SET 
+                            image = '${userInfo.image}',
+                            country = '${userInfo.country}',
+                            first_name = '${userInfo.fName}',
+                            last_name = '${userInfo.lName}',
+                            birth_date = '${userInfo.date}' 
+                            WHERE id = ${userId}`);
+ };
   
 module.exports = {
     test : test,
     getUserById : getUserById,
     likeUser : likeUser,
     registerUser : registerUser,
-    userLogin : userLogin
+    userLogin : userLogin,
+    updateUser : updateUser
 };
