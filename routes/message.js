@@ -5,9 +5,6 @@ let messageController = require("../controllers/MessageController");
 const checkuser = (req, res, next) => {
     let currentUser = req.session.user.id
     let requestUser = req.params.userId
-
-    console.log(req);
-    // console.log(requestUser);
     if(currentUser != requestUser){
        return res.redirect("/messages/list/"+currentUser)
     }

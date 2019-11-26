@@ -11,6 +11,7 @@ exports.messagePage = async(req, res) => {
             return rows;
         });
     }
+    console.log(messageList);
 
     let talkList = await messageModel.getTalkList(currentUserId).then(([rows, fieldData]) => {
         return rows;
@@ -30,8 +31,6 @@ exports.messagePage = async(req, res) => {
             data.toImage = data.fromImage;
         }
     });
-
-    console.log(talkList);
     
     // handling message list
     let refinedList;
@@ -40,7 +39,7 @@ exports.messagePage = async(req, res) => {
     if(topic_id){
         refinedList = new Array();
         eachDay = new Array();
-        messageList[0].createa_at = messageList[0].created_at.slice(0,10);
+        messageList[0].created_at = messageList[0].created_at.slice(0,10);
         eachDay.push(messageList[0])
         createdAt = messageList[0].created_at;
 
@@ -57,6 +56,7 @@ exports.messagePage = async(req, res) => {
         }
         refinedList.push(eachDay);
     }
+
 
     res.render('message', { chatList: talkList, messageList: refinedList, userId : currentUserId, messageCSS: true }); 
 };

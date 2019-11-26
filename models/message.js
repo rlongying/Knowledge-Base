@@ -102,7 +102,7 @@ const sendMessage = async (topic_id, message) => {
   }
 
   let time =  hour + ":" + minute;
-  let created_at = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getMinutes()+ ":" + date.getSeconds();
+  let created_at = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours()+ ":" + date.getMinutes() + ":" + date.getSeconds();
   let sql = `INSERT INTO 
             message(user_id, topic_id, message, created_at, time)
             VALUES(1, ${topic_id}, "${message}", "${created_at}", "${time}")`;
