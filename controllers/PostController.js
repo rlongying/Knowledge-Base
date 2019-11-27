@@ -1,7 +1,7 @@
 let postModel = require("../models/post");
 
 exports.getPostsByContent = (req, res) => {
-  const { msg } = req.params;
+  const { msg } = req.body;
 
   postModel
     .getPostsByContent(msg)
@@ -12,11 +12,11 @@ exports.getPostsByContent = (req, res) => {
 };
 
 exports.getPostsByTopic = (req, res) => {
-  const { topic } = req.params;
+  const { topic } = req.body;
   postModel
     .getPostsByTopic(topic)
     .then(([rows, fields]) => {
-      res.json(rows);
+      res.render("postResults", { postCSS: true, posts: rows });
     })
     .catch(error => console.log("get post by topic error: " + error));
 };

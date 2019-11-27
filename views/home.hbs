@@ -1,65 +1,49 @@
-{{>header}}
-<div class="d-flex justify-content-around" >
-    <div id='left-col'>
-        <div class='profile-img-wrapper'>
-            <img id='proPic' src="{{user.[0].image}}" alt="">
+<div class="container">
+    {{>header}}
+    <div class="row justify-content-between">
+        <div class='col-3'>
+            {{>profile}}
         </div>
-        <div>{{user.[0].first_name}} {{user.[0].last_name}}</div>
-        <div>{{user.[0].about}}</div>
-        <div>
-            <table class='table'>
-                <tbody>
-                    <tr>
-                        <td>Posts</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>Messages</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>Likes</td>
-                        <td>{{user.likes}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <a href="/profile/{{user.[0].id}}/edit">Edit Profile</a>
-    </div>
-    <div id='right-col'>
-        <div>
-            <form>
-                <div id="submit-post-form" class="form-group">
-                    <label for="inputAddress">What is your question today?</label>
-                    <input type="text" class="form-control col-lg-7" placeholder="subject">
-                    <textarea class="form-control col-lg-7" rows="3" placeholder="explain in detail..."></textarea>
-                    <div class="d-flex">
-                        <select class="form-control form-control-md col-sm-3" placeholder="topic">
-                            <option>php</option>
-                            <option>java</option>
-                            <option>node</option>
-                        </select>
-                        <button type="submit" class="btn btn-info">Post to timeline</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div>
-            <div id="minisearch-wrapper">
-                <div id="searchByTopicDiv" class="col-sm-3">Search by topic</div>
-                <div id="" class="col-sm-7 d-flex">
-                    <select class="form-control form-control-md col-sm-3" placeholder="topic">
-                        <option>php</option>
-                        <option>java</option>
-                        <option>node</option>
-                    </select>
-                    <button type="submit" class="btn btn-info">Go-></button>
-                </div>
-            </div>
-            <div id="latestDiscussion">Latest discussion</div>
-            {{!-- latest discussion --}}
-            {{>posts}}
-        </div>
-    </div>
+        <div class='col-8'>
+            <div class="row mt-3">
+                <form action="/posts/add" method="POST" class="col-12">
 
-</div>
+                    <input type="text" name="created_at" value="{{currentTime}}" hidden>
+                    <input type=" text" name="user_id" value="{{user.id}}" hidden>
+                    <div class=" form-group">
+                        <label class="subject-label mb-2" for="subject">What is your question
+                            today?</label>
+                        <input type="text" class="form-control col-lg-7 mb-3" name="subject" placeholder="subject">
+                        <textarea class="form-control col-lg-7 mb-3" rows="4" name="message"
+                            placeholder="explain in detail..."></textarea>
+                        <div class="d-flex">
+                            <select class="form-control form-control-md col-sm-3" placeholder="topic" name="topic">
+                                <option value="php">php</option>
+                                <option value="java">java</option>
+                                <option value="nodejs">nodejs</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary ml-5">Post to timeline</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row mt-3 mb-5">
+                <form action="/posts/search-by-topic" method="POST" class="form-inline col-12 justify-items-center">
+
+                    <label class="font-weight-bold">Search By Topic: </label>
+                    <select class="form-control form-control-md col-sm-3 ml-3" name="topic">
+                        {{#each topics}}
+                        <option value={{this.topic}}>{{this.topic}}</option>
+                        {{/each}}
+                    </select>
+
+                    <button type="submit" class="btn btn-primary ml-3">Go -></button>
+                </form>
+            </div>
+            <div class="row mb-2 font-weight-bold">Latest discussion</div>
+            {{!-- latest discussion --}}
+            <div class="row">
+                {{>posts}}
+            </div>
+        </div>
+    </div>

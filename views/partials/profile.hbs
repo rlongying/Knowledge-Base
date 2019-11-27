@@ -1,0 +1,31 @@
+<div class="card text-center mt-3">
+    <a href="/profile/{{user.id}}"><img class="card-img-top" src="{{user.image}}" alt="user picture"></a>
+    <div class="card-body">
+        <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+        <p class="card-text">{{user.about}}</p>
+    </div>
+</div>
+<div class="row">
+    <table class='table user-info'>
+        <tbody>
+            <tr>
+                <td><a href="/home/posts">Posts</a></td>
+                <td>{{user.postCount}}</td>
+            </tr>
+            <tr>
+                <td><a href="/messages/list/{{user.id}}">Messages</a></td>
+                <td>{{user.messageCount}}</td>
+            </tr>
+            <tr>
+                <td>Likes</td>
+                <td>{{user.likes}}</td>
+            </tr>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td> <a href="/profile/{{user.id}}/edit">Edit Profile</a></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

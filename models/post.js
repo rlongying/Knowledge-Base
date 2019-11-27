@@ -106,7 +106,7 @@ const getPostsByContent = msg => {
             ON p.user_id = u.id
           LEFT JOIN comment AS c
             ON p.id = c.post_id
-        WHERE p.message LIKE '%${msg}%'
+        WHERE p.subject LIKE '%${msg}%'
         GROUP BY p.id
    `;
   return db.query(sql);
@@ -162,6 +162,7 @@ const getPostsByUserId = userId => {
           LEFT JOIN comment AS c
             ON p.id = c.post_id
         GROUP BY p.id
+        ORDER BY p.created_at DESC
     `;
 
   return db.query(sql);

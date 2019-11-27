@@ -3,85 +3,30 @@
     border-width: 1px;
 } */
 
-#left-col{
-    width:30%;
-    padding:5%;
-    padding-top:0;
-    text-align: center;
-}
-#right-col{
-    width:70%;
-    padding:5%;
-    padding-top:0;
+.card {
+  border: none;
 }
 
-#proPic{
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-    border: 1px solid;
-    border-radius: 100%;
+.card-img-top {
+  width: 60%;
+  border-radius: 50%;
+  align-self: center;
 }
 
-.profile-img-wrapper{
-    padding:10%;
-}
-.post-img-wrapper{
-    width:20%;
-}
-.post-right-col{
-    width:80%;
-}
-.post-img{
-    width:80%;
-    margin-left:0;
-    margin-right:auto;
-    display:block;
-}
-.post-topic{
-    border-style: solid;
-    border-width: 1px;
-    border-color: #18A2B8;
-    color:#18A2B8;
-    text-align: center;
-    width:15%;
+.user-info {
+  margin-left: 2.5em;
+  width: 70% !important;
 }
 
-.post-div{
-    margin-bottom:3%;
+.user-info td {
+  border-top: none;
 }
 
-.reply-button{
-    cursor: pointer;
+.user-info td a {
+  text-decoration: underline;
 }
 
-#submit-post-form > *{
-    margin-bottom:1%;
+.subject-label {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
-
-button {
-    background-color: #00A2E8 !important;
-}
-
-
-
-
-/*************************/
-/****** single dives *****/
-/*************************/
-#searchByTopicDiv{
-    font-weight: bold;
-    font-size:125%;
-    text-align: right;
-    padding-left:0;
-}
-#latestDiscussion{
-    font-weight: bold;
-    font-size:125%;
-}
-#minisearch-wrapper{
-    margin-top:5%;
-    margin-bottom:2%;
-    display:flex;
-}
-/************************/

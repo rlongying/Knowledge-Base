@@ -1,17 +1,18 @@
 <nav id="nav" class="navbar navbar-light">
   <div class='navbar justify-content-start w-75'>
     <a href="/" id='home' class="navbar-brand">k<mark class='blue'>b</mark></a>
-    <form id="searchBar" class="w-75">
-        <div>
-          <input id="searchInput" class="form-control mr-sm-2 w-75" type="search" placeholder="Search" aria-label="Search">
-          <button id="searchBtn" class="btn btn-info" type="submit">Search</button>
-        </div>
+    <form id="searchBar" class="w-75" action="/posts/search-by-msg" method="POST">
+      <div>
+        <input id="searchInput" class="form-control mr-sm-2 w-75" type="search" placeholder="Search" aria-label="Search"
+          name="msg">
+        <button id="searchBtn" class="btn btn-info" type="submit">Search</button>
+      </div>
     </form>
   </div>
   <div class="d-flex w-25 justify-content-end">
     <form action='/' method='post'>
       <button id="logout" class="btn btn-info">sign out</button>
-  </form>
+    </form>
   </div>
-  
+
 </nav>

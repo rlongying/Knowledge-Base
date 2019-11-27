@@ -7,8 +7,8 @@
                 <h5 class="mt-0 mb-1">{{this.subject}}</h5>
                 <span class="topic">{{this.topic}}</span>
             </div>
-            {{ellipsis this.message}}
-            <div class="row-space-between">
+            <p class="pl-3">{{ellipsis this.message}}</p>
+            <div class="row-space-between pl-3">
                 <span><small class="font-weight-lighter font-italic">{{parseDate this.created_at}}</small></span>
                 <span class="font-weight-lighter font-italic replies"><a href="/posts/post/{{this.id}}">{{this.replies}}
                         replies</a></span>
