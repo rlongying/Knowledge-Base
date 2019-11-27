@@ -57,7 +57,7 @@ exports.addPost = (req, res) => {
 
   postModel
     .addPost(post)
-    .then(results => res.status(200).json(results))
+    .then(results => res.redirect("/home"))
     .catch(err => res.json({ "add error:": err }));
 };
 

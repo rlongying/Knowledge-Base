@@ -8,7 +8,7 @@
             <div class="row mt-3">
                 <form action="/posts/add" method="POST" class="col-12">
 
-                    <input type="text" name="created_at" value="{{currentTime}}" hidden>
+                    <input type="text" name="created_at" value="{{now}}" hidden>
                     <input type=" text" name="user_id" value="{{user.id}}" hidden>
                     <div class=" form-group">
                         <label class="subject-label mb-2" for="subject">What is your question
@@ -18,9 +18,10 @@
                             placeholder="explain in detail..."></textarea>
                         <div class="d-flex">
                             <select class="form-control form-control-md col-sm-3" placeholder="topic" name="topic">
-                                <option value="php">php</option>
-                                <option value="java">java</option>
-                                <option value="nodejs">nodejs</option>
+                                {{#each topics}}
+                                <option value={{this.topic}}>{{this.topic}}</option>
+                                {{/each}}
+
                             </select>
                             <button type="submit" class="btn btn-primary ml-5">Post to timeline</button>
                         </div>
