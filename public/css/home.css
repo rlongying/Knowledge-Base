@@ -30,3 +30,11 @@
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.prev-form {
+  float: left;
+}
+
+.next-form {
+  float: right;
+}

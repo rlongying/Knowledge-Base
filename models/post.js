@@ -1,5 +1,6 @@
 let db = require("../util/database");
 const LATEST_POST = 5;
+const POST_PER_PAGE = 2;
 
 const seedPosts = () => {
   let sql =
@@ -192,5 +193,7 @@ module.exports = {
   getLatestPosts: getLatestPosts,
   addPost: addPost,
   addComment: addComment,
-  getTopics: getTopics
+  getTopics: getTopics,
+  POST_PER_PAGE: POST_PER_PAGE,
+  LATEST_POST: LATEST_POST
 };

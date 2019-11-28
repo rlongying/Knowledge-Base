@@ -46,5 +46,21 @@
             <div class="row">
                 {{>posts}}
             </div>
+            <div class="w-75 px-5">
+                {{#if prev}}
+                <form action="/home" method="POST" class="prev-form">
+                    <input type="text" value={{page}} name="page" hidden>
+                    <input type="text" value="true" name="prev" hidden>
+                    <button type="submit" class="btn btn-outline-primary btn-sm">prev</button>
+                </form>
+                {{/if}}
+                {{#if next}}
+                <form action="/home" method="POST" class="next-form">
+                    <input type="text" value={{page}} name="page" hidden>
+                    <input type="text" value="true" name="next" hidden>
+                    <button type="submit" class="btn btn-outline-primary btn-sm">next</button>
+                </form>
+                {{/if}}
+            </div>
         </div>
     </div>
