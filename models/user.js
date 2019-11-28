@@ -64,11 +64,13 @@ const getUserInfo = userId => {
             (
                 select count(*) 
                 from post p 
-                where p.user_id = ${userId}) as postCount,
+                where p.user_id = ${userId}
+            ) as postCount,
             (
                 select count(*) 
-                from message m 
-                where m.user_id = ${userId}) as messageCount
+                from message_topic as m 
+                where m.user_from_id = ${userId} or m.user_to_id = ${userId}
+            ) as messageCount
         from user u
         where u.id = ${userId}
         `;
