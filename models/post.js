@@ -1,6 +1,6 @@
 let db = require("../util/database");
-const LATEST_POST = 5;
-const POST_PER_PAGE = 2;
+const LATEST_POST = 100;
+const POST_PER_PAGE = 5;
 
 const seedPosts = () => {
   let sql =
@@ -39,7 +39,7 @@ const getLatestPosts = () => {
           LEFT JOIN comment AS c
             ON p.id = c.post_id 
         GROUP BY p.id
-        ORDER BY created_at
+        ORDER BY created_at DESC
         LIMIT  ${LATEST_POST}
    `;
 
