@@ -43,7 +43,7 @@ const parseDate = date => {
 
 const currentTime = () => {
   let now = new Date();
-  return now.toISOString().substr(0, 10);
+  return now.getTime();
 };
 
 module.exports = {

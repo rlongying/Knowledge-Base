@@ -3,19 +3,21 @@
     <div id='img-side'>
         <div id='img-wrapper'>
             {{#if userInfo.[0].image}}
-                <img src="{{userInfo.[0].image}}" alt="">
-                {{else}}
-                <img src="/images/default.jpg" alt="">
+            <img src="{{userInfo.[0].image}}" alt="">
+            {{else}}
+            <img src="/images/default.jpg" alt="">
             {{/if}}
         </div>
     </div>
 
     <form action="/profile/{{userInfo.[0].id}}/send" method="post" id='form-side'>
+        <input type="text" name="createdAt" value="{{now}}" hidden>
         <div class="form-group col-lg-10 info">
-            <input type="text" class="form-control" id="subject" placeholder="subject" name ='subject' form="form-side">
+            <input type="text" class="form-control" id="subject" placeholder="subject" name='subject' form="form-side">
         </div>
         <div class="form-group col-lg-10 info">
-            <textarea type="text" class="form-control" id="messageDetail" placeholder="message detail" name='message' form="form-side"></textarea>
+            <textarea type="text" class="form-control" id="messageDetail" placeholder="message detail" name='message'
+                form="form-side"></textarea>
         </div>
         <div id='submitBtn' class="form-group col-lg-10 info">
             <button type="submit" class="btn btn-info">SEND</button>

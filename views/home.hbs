@@ -8,6 +8,7 @@
             <div class="row mt-3">
                 <form action="/posts/add" method="POST" class="col-12">
                     <input type=" text" name="user_id" value="{{user.id}}" hidden>
+                    <input type=" text" name="createdAt" value="{{now}}" hidden>
                     <div class=" form-group">
                         <label class="subject-label mb-2" for="subject">What is your question
                             today?</label>

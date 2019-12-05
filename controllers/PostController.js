@@ -52,9 +52,10 @@ exports.getPostsByUserId = (req, res) => {
 };
 
 exports.addPost = (req, res) => {
-  const { topic, subject, message, user_id } = req.body;
+  const { topic, subject, message, user_id, createdAt } = req.body;
   // change the date to locale
-  let created_at = new Date();
+  // createAt a is string representing the milliseconds
+  let created_at = new Date(parseInt(createdAt));
 
   let post = { topic, subject, message, created_at, user_id };
 
