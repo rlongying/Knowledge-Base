@@ -79,7 +79,8 @@ const getPostById = async postId => {
     FROM comment AS c
     JOIN user AS u
       ON c.user_id = u.id
-    WHERE c.post_id = ${postId}`
+    WHERE c.post_id = ${postId}
+    ORDER BY c.created_at DESC`
   );
 
   return { post: post[0], comments };

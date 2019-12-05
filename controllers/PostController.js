@@ -76,8 +76,8 @@ exports.getLatestPosts = (req, res) => {
 };
 
 exports.addComment = (req, res) => {
-  const { message, created_at, post_id, user_id } = req.body;
-
+  let { message, created_at, post_id, user_id } = req.body;
+  created_at = new Date(parseInt(created_at));
   postModel
     .addComment({ message, created_at, post_id, user_id })
     .then(result => res.redirect(301, "/posts/post/" + post_id))
