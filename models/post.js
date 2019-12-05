@@ -164,7 +164,7 @@ const getPostsByUserId = userId => {
           LEFT JOIN comment AS c
             ON p.id = c.post_id
         GROUP BY p.id
-        ORDER BY p.created_at DESC
+        ORDER BY p.created_at ASC
     `;
 
   return db.query(sql);
