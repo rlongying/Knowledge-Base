@@ -26,12 +26,20 @@ exports.registerPage = (req, res) => {
     res.render('signup', {registerCSS: true, userInfo: req.body });
 };
 
-exports.register = (req, res) => {
-    userModel.registerUser(req.body)
-    .then(([rows, field]) => {
-        res.redirect('/home');
-    })
-    .catch((error) => console.log("error: " + error));
+exports.register = async (req, res) => {
+    let userId;
+    await userModel.registerUser(req.body).then(([rows, field]) => {
+        userId = rows.insertId
+    }).catch((error) => console.log("error: " + error));
+
+    userModel.getUserById(userId).then(([rows, field]) => {
+        if(rows.length > 0){
+            req.session.user = rows[0];
+            res.redirect('/home');
+        } else {
+            res.render('login', {loginCSS: true, loginFail: true})
+        }
+    }).catch((error) => console.log("login error: " + error));
 };
 
 exports.logout = (req, res) => {

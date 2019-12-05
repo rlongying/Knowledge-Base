@@ -13,7 +13,7 @@ async function test() {
  * this method returns a promise
  * @param {Object} user
  */
-const registerUser = user => {
+const registerUser = async user => {
   const {
     firstname,
     lastname,
@@ -26,7 +26,7 @@ const registerUser = user => {
   } = user;
   let sql =
     "INSERT INTO user(first_name, last_name, email, password, image, about, country, birth_date) values (?,?,?,?,?,?,?,?)";
-  return db.query(sql, [
+  return await db.query(sql, [
     firstname,
     lastname,
     email,
