@@ -80,7 +80,7 @@ const getPostById = async postId => {
     JOIN user AS u
       ON c.user_id = u.id
     WHERE c.post_id = ${postId}
-    ORDER BY c.created_at DESC`
+    ORDER BY c.created_at ASC`
   );
 
   return { post: post[0], comments };
@@ -164,7 +164,7 @@ const getPostsByUserId = userId => {
           LEFT JOIN comment AS c
             ON p.id = c.post_id
         GROUP BY p.id
-        ORDER BY p.created_at ASC
+        ORDER BY p.created_at DESC
     `;
 
   return db.query(sql);
