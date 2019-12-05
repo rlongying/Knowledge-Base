@@ -1,4 +1,4 @@
-let db = require("../util/database");
+gilet db = require("../util/database");
 
 /*
  * Get a list of chat room list by current user id with images, name and
