@@ -1,8 +1,6 @@
 let messageModel = require("../models/message");
 
 exports.messagePage = async (req, res) => {
-  console.log("message url: " + req.url);
-  // messageModel.seed();
   let currentUserId = req.params.userId;
   let topic_id = req.params.topicId;
   let messageList;
@@ -19,7 +17,6 @@ exports.messagePage = async (req, res) => {
     .then(([rows, fieldData]) => {
       return rows;
     });
-  console.log(talkList);
 
   // handling talk list
   talkList.forEach(data => {

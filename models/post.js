@@ -2,19 +2,6 @@ let db = require("../util/database");
 const LATEST_POST = 100;
 const POST_PER_PAGE = 5;
 
-const seedPosts = () => {
-  let sql =
-    "insert into post(topic, subject, message, created_at, user_id) values ?";
-
-  let values = [
-    ["java", "java topic 1", "java message 1", new Date(2019, 08, 15), 11],
-    ["java", "java topic 2", "java message 2", new Date(2019, 08, 15), 11],
-    ["java", "java topic 3", "java message 3", new Date(2019, 08, 15), 11]
-  ];
-
-  return db.query(sql, [values]);
-};
-
 const addPost = post => {
   const { topic, subject, message, created_at, user_id } = post;
   let sql =
@@ -80,7 +67,7 @@ const getPostById = async postId => {
     JOIN user AS u
       ON c.user_id = u.id
     WHERE c.post_id = ${postId}
-    ORDER BY c.created_at DESC`
+    ORDER BY c.created_at ASC`
   );
 
   return { post: post[0], comments };
@@ -186,7 +173,6 @@ const getTopics = () => {
 };
 
 module.exports = {
-  seedPosts: seedPosts,
   getPost: getPostById,
   getPostsByContent: getPostsByContent,
   getPostsByTopic: getPostsByTopic,

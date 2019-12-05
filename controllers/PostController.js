@@ -27,8 +27,6 @@ exports.getPostDetail = (req, res) => {
   postModel
     .getPost(postId)
     .then(({ post, comments }) => {
-      // res.json({ post, comments, user: req.session.user.id });
-
       res.render("postResults", {
         postCSS: true,
         post,
@@ -69,7 +67,6 @@ exports.getLatestPosts = (req, res) => {
   postModel
     .getLatestPosts()
     .then(([rows, fields]) => {
-      // res.json(rows);
       res.render("postResults", { postCSS: true, posts: rows });
     })
     .catch(err => console.log("get latest posts error: " + err));

@@ -43,6 +43,6 @@ exports.register = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-    req.session.user = undefined;
+    req.session.destroy();
     res.render('login', {loginCSS: true });
 };
