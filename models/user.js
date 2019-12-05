@@ -89,6 +89,7 @@ const updateUser = async (userId, userInfo) => {
                             country = '${userInfo.country}',
                             first_name = '${userInfo.fName}',
                             last_name = '${userInfo.lName}',
+                            about = '${userInfo.about}',
                             birth_date = '${userInfo.date}' 
                             WHERE id = ${userId}`);
 };

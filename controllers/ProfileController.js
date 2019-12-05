@@ -120,7 +120,6 @@ async function editProfile(req, res) {
       user = rows;
     })
     .catch(error => console.log("error: " + error));
-  console.log(user);
   res.render("editProfile", { editProfileCSS: true, user: user });
 }
 
