@@ -3,7 +3,11 @@
     <div class="row d-flex flex-column mt-4">
         <div class="d-flex justify-content-between">
             <div id="mainImage" class="rounded-circle">
-                <img src="{{user.image}}" alt="">
+                {{#if user.image}}
+                    <img src="{{user.image}}" alt="">
+                    {{else}}
+                    <img src="/images/default.jpg" alt="">
+                {{/if}}
             </div>
             <form action="/profile/{{user.id}}/message" method="get" class="align-self-end">
                 <button id="messageBtn" class="btn btn-primary btn-lg" type="submit">Message</button>

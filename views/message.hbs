@@ -3,7 +3,13 @@
     <div id="chatList" class="overflow-auto">
         {{#each chatList}}
         <a class='chats' href="/messages/list/{{../userId}}/{{this.topic_id}}">
-            <div class="img-wrapper"><img class='img-on-list rounded-circle'src="{{this.toImage}}" alt=""></div>
+            <div class="img-wrapper">
+                {{#if this.toImage}}
+                    <img class='img-on-list rounded-circle' src="{{this.toImage}}" alt="">
+                    {{else}}
+                    <img class='img-on-list rounded-circle' src="/images/default.jpg" alt="">
+                {{/if}}
+            </div>
             <div class="">
                 <div>
                     <div>{{this.toFName}} {{this.toLName}}</div><div>{{this.latestDate}}</div>
@@ -20,7 +26,13 @@
             <hr class='hr-text' data-content="{{this.[0].created_at}}">
                 {{#each this}}
                 <div class="meesages-each d-flex">
-                    <div class="profilePic-message"><img class='rounded-circle'src="{{this.image}}" alt=""></div>
+                    <div class="profilePic-message">
+                        {{#if this.image}}
+                            <img class='rounded-circle' src="{{this.image}}" alt="">
+                            {{else}}
+                            <img class='img-on-list rounded-circle' src="/images/default.jpg" alt="">
+                        {{/if}}
+                    </div>
                     <div class="col-lg-10">
                         <div class="senderInfo d-flex">
                             <div>{{this.first_name}} {{this.last_name}}</div>
