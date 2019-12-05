@@ -25,7 +25,7 @@ exports.showHome = async (req, res) => {
     page -= 1;
   }
 
-  const totalPage = Math.ceil(postModel.LATEST_POST / postModel.POST_PER_PAGE);
+  const totalPage = Math.ceil(posts.length / postModel.POST_PER_PAGE);
   // next button clicked
   if (req.body.next && page < totalPage) {
     page += 1;
