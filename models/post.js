@@ -181,7 +181,7 @@ const addComment = comment => {
 };
 
 const getTopics = () => {
-  return db.query("SELECT DISTINCT topic FROM post");
+  return db.query("SELECT topic FROM topic");
 };
 
 module.exports = {
